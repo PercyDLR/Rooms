@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.rooms.R;
+import com.example.rooms.admin.CuentaAdminActivity;
 import com.example.rooms.usuario.CuentaUsuarioActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -18,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void irLogueo (View view){
-        startActivity(new Intent(MainActivity.this, CuentaUsuarioActivity.class));
+        startActivity(new Intent(MainActivity.this, CuentaAdminActivity.class));
     }
     public void irRegistro (View view){
         startActivity(new Intent(MainActivity.this, RegistroActivity.class));

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navigation_espacios"
+        android:icon="@drawable/espacio_selector"
+        android:enabled="true"
+        android:title="Espacios"/>
+
+    <item
+        android:id="@+id/navigation_usuarios"
+        android:icon="@drawable/usuarios_selector"
+        android:enabled="true"
+        android:title="Usuarios"/>
+
+    <item
+        android:id="@+id/navigation_cuenta_admin"
+        android:icon="@drawable/cuenta_selector"
+        android:enabled="true"
+        android:title="Cuenta"/>
+</menu>
