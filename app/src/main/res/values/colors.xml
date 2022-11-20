@@ -7,4 +7,14 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- Colores Personalizados -->
+    <color name="negroFondo">#252121</color>
+    <color name="negroContenedor">#2E2828</color>
+    <color name="rojo">#d84642</color>
+    <color name="rojoSecundario">#ff786d</color>
+    <color name="amarillo">#f9a900</color>
+    <color name="amarilloSecundario">#ffda4a</color>
+    <color name="blancoTexto">#DADADA</color>
+
 </resources>
