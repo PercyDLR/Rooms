@@ -8,8 +8,8 @@
 
 
     <LinearLayout
-        android:layout_width="409dp"
-        android:layout_height="729dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="1dp"
         android:layout_marginTop="1dp"
         android:layout_marginEnd="1dp"
@@ -17,8 +17,10 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
@@ -160,9 +162,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/amarillo"
+                    android:text="Cambiar Contraseña"
                     android:textColor="@color/negroContenedor"
-                    android:textStyle="bold"
-                    android:text="Cambiar Contraseña" />
+                    android:textStyle="bold" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
@@ -195,7 +197,7 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="30dp"
+
                     android:padding="10dp"
                     app:cardBackgroundColor="@color/negroContenedor"
                     app:cardCornerRadius="20dp">
@@ -235,8 +237,8 @@
                                 android:text="100"
                                 android:textAlignment="textEnd"
                                 android:textColor="@color/amarillo"
-                                android:textStyle="bold"
-                                android:textSize="24sp" />
+                                android:textSize="24sp"
+                                android:textStyle="bold" />
                         </LinearLayout>
 
                         <TextView
@@ -252,14 +254,26 @@
 
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
-
-                <Button
-                    android:id="@+id/button2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textStyle="bold"
-                    android:text="Cerrar sesión" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cerrar Sesión"
+            android:layout_margin="15dp"
+            android:textStyle="bold" />
     </LinearLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/navigationView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:elevation="6dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:menu="@menu/menu_usuario" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

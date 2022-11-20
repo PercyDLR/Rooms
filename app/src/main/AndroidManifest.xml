@@ -13,9 +13,17 @@
         android:theme="@style/Theme.Rooms"
         tools:targetApi="31">
         <activity
-            android:name=".login.LoginActivity"
+            android:name=".login.RegistroActivity"
             android:parentActivityName=".login.MainActivity"
             android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".login.LoginActivity"
+            android:exported="false"
+            android:parentActivityName=".login.MainActivity">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
