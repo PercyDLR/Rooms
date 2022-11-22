@@ -40,6 +40,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="30dp"
+                android:background="@color/negroContenedor"
                 android:hint="Nombres"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
@@ -53,6 +54,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="30dp"
+                android:background="@color/negroContenedor"
                 android:hint="Apellidos"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
@@ -66,6 +68,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="30dp"
+                android:background="@color/negroContenedor"
                 android:hint="TI"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
@@ -79,6 +82,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="30dp"
+                android:background="@color/negroContenedor"
                 android:hint="Correo"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
@@ -92,6 +96,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="30dp"
+                android:background="@color/negroContenedor"
                 android:hint="Contraseña"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
@@ -106,6 +111,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="50dp"
+                android:background="@color/negroContenedor"
                 android:hint="Confirmar Contraseña"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 

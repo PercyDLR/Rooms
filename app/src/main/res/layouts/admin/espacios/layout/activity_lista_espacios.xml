@@ -6,4 +6,22 @@
     android:layout_height="match_parent"
     tools:context=".admin.ListaEspaciosActivity">
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textField"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        app:startIconDrawable="@drawable/ic_search"
+        app:startIconTint="@color/amarillo"
+        app:startIconContentDescription="Buscar"
+        android:hint="Buscar">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/negroContenedor"
+            android:backgroundTint="@color/negroContenedor" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

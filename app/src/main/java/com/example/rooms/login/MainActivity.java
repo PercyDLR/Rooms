@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void irLogueo (View view){
-        startActivity(new Intent(MainActivity.this, CuentaAdminActivity.class));
+        startActivity(new Intent(MainActivity.this, LoginActivity.class));
     }
     public void irRegistro (View view){
         startActivity(new Intent(MainActivity.this, RegistroActivity.class));

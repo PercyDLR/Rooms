@@ -20,12 +20,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <TextView
+            android:id="@+id/textView18"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="40dp"
+            android:gravity="center"
+            android:text="Ingrese los a su cuenta para poder usar la aplicación" />
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="30dp"
             android:hint="Correo"
+            android:background="@color/negroContenedor"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -39,6 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="30dp"
             android:hint="Contraseña"
+            android:background="@color/negroContenedor"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -83,5 +95,16 @@
             android:textColor="@color/negroContenedor"
             android:drawableTint="@color/negroContenedor"
             android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/textView19"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="40dp"
+            android:gravity="center"
+            android:textColor="@color/amarillo"
+            android:text="¿Olvidó su contraseña?" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
