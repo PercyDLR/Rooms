@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".login.LoginActivity">
 
-
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -31,7 +30,7 @@
             android:text="Ingrese los a su cuenta para poder usar la aplicación" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textField"
+            android:id="@+id/etLoginCorreo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="30dp"
@@ -45,7 +44,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textField2"
+            android:id="@+id/etLoginPswd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="30dp"
@@ -70,31 +69,6 @@
             android:text="Iniciar Sesión"
             android:textSize="20sp" />
 
-        <TextView
-            android:id="@+id/textView17"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="o"
-            android:textAlignment="center"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <Button
-            android:id="@+id/btnGoogle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:drawableLeft="@drawable/ic_google"
-            android:padding="10dp"
-            android:paddingStart="25dp"
-            android:text="Ingresar con Google"
-            android:onClick="irUsuario"
-            android:textSize="20sp"
-            android:gravity="center"
-            android:backgroundTint="@color/amarillo"
-            android:textColor="@color/negroContenedor"
-            android:drawableTint="@color/negroContenedor"
-            android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/textView19"
