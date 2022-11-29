@@ -33,9 +33,13 @@
             android:id="@+id/etLoginCorreo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="30dp"
+            android:layout_marginBottom="10dp"
+            app:boxBackgroundColor="@color/negroContenedor"
             android:hint="Correo"
-            android:background="@color/negroContenedor"
+            app:boxStrokeErrorColor="@color/amarillo"
+            app:errorIconTint="@color/amarillo"
+            app:errorTextColor="@color/amarillo"
+            app:errorEnabled="true"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -47,9 +51,13 @@
             android:id="@+id/etLoginPswd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="30dp"
-            android:hint="Contraseña"
-            android:background="@color/negroContenedor"
+            android:layout_marginBottom="10dp"
+            app:boxBackgroundColor="@color/negroContenedor"
+            android:hint="Correo"
+            app:boxStrokeErrorColor="@color/amarillo"
+            app:errorIconTint="@color/amarillo"
+            app:errorTextColor="@color/amarillo"
+            app:errorEnabled="true"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -64,10 +72,35 @@
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
             android:layout_marginBottom="10dp"
-            android:onClick="irUsuario"
+            android:onClick="logueo"
             android:padding="10dp"
             android:text="Iniciar Sesión"
             android:textSize="20sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:text="o"/>
+
+        <Button
+            android:id="@+id/btnGoogle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:drawableLeft="@drawable/ic_google"
+            android:padding="10dp"
+            android:paddingStart="25dp"
+            android:text="Ingresar con Google"
+            android:onClick="irUsuario"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:backgroundTint="@color/amarillo"
+            android:textColor="@color/negroContenedor"
+            android:drawableTint="@color/negroContenedor"
+            android:textStyle="bold"/>
 
 
         <TextView
@@ -81,4 +114,16 @@
             android:textColor="@color/amarillo"
             android:text="¿Olvidó su contraseña?" />
     </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/pbLogin"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/negroContenedor"
+        android:padding="175dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

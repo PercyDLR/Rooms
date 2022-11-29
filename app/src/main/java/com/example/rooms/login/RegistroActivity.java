@@ -68,6 +68,7 @@ public class RegistroActivity extends AppCompatActivity {
 
                                         progressBar.setVisibility(View.GONE);
                                         if (guardado.isSuccessful()){
+                                            auth.getCurrentUser().sendEmailVerification();
                                             Toast.makeText(RegistroActivity.this, "Registro Exitoso. Proceda a verificar su cuenta", Toast.LENGTH_SHORT).show();
                                             Log.d("registro", "Registro Exitoso. Proceda a verificar su cuenta");
                                             startActivity(new Intent(getApplicationContext(),MainActivity.class));

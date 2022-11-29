@@ -82,7 +82,7 @@
                                 android:textStyle="bold" />
 
                             <TextView
-                                android:id="@+id/textView7"
+                                android:id="@+id/tvNombreCuentaAdmin"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -114,7 +114,7 @@
                                 android:textStyle="bold" />
 
                             <TextView
-                                android:id="@+id/textView9"
+                                android:id="@+id/tvCorreoCuentaAdmin"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -143,13 +143,24 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/btnLogOutAdmin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Cerrar Sesión"
             android:layout_margin="15dp"
             android:textStyle="bold" />
     </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/pbCuentaAdmin"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/negroContenedor"
+        android:padding="175dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/navigationView"

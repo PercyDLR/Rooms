@@ -164,12 +164,13 @@
     </ScrollView>
     <ProgressBar
         android:id="@+id/pbRegister"
-        android:layout_width="10dp"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:boxBackgroundColor="@color/negroContenedor"
+        android:background="@color/negroContenedor"
         android:padding="175dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
