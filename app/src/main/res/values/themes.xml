@@ -8,12 +8,11 @@
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/amarillo</item>
         <item name="colorSecondaryVariant">@color/amarilloSecundario</item>
-        <item name="colorOnSecondary">@color/negroContenedor</item>
+        <item name="colorOnSecondary">@color/negroFondo</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">@color/negroFondo</item>
         <!-- Customize your theme here. -->
         <item name="android:windowBackground">@color/negroFondo</item>
         <item name="android:textColor">@color/blancoTexto</item>
     </style>
-
 </resources>

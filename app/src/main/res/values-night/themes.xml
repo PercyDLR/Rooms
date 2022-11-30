@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Rooms" parent="Theme.Material3.Dark">
+    <style name="Theme.Rooms" parent="Theme.Material3.DayNight">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/rojo</item>
         <item name="colorPrimaryVariant">@color/rojoSecundario</item>
@@ -8,7 +8,7 @@
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/amarillo</item>
         <item name="colorSecondaryVariant">@color/amarilloSecundario</item>
-        <item name="colorOnSecondary">@color/white</item>
+        <item name="colorOnSecondary">@color/negroFondo</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">@color/negroFondo</item>
         <!-- Customize your theme here. -->

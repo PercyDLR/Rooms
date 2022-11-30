@@ -33,6 +33,7 @@ public class LoginActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.pbLogin);
         inputCorreo = findViewById(R.id.etLoginCorreo);
         inputPwd = findViewById(R.id.etLoginPswd);
+        inputPwd.setErrorIconDrawable(null);
 
         auth = FirebaseAuth.getInstance();
         ref = FirebaseDatabase.getInstance().getReference("usuarios");
@@ -64,12 +65,10 @@ public class LoginActivity extends AppCompatActivity {
 
                                                 // Se redirige por rol
                                                 if (user.getRol().equals("admin")){
-                                                    Toast.makeText(getApplicationContext(),"Logueo Exitoso: admin",Toast.LENGTH_SHORT).show();
                                                     Log.d("logueo", "Logueo Exitoso: admin");
                                                     startActivity(new Intent(getApplicationContext(), CuentaAdminActivity.class));
                                                     finish();
                                                 } else if (user.getRol().equals("usuario")) {
-                                                    Toast.makeText(getApplicationContext(),"Logueo Exitoso: usuario",Toast.LENGTH_SHORT).show();
                                                     Log.d("logueo", "Logueo Exitoso: usuario");
                                                     startActivity(new Intent(getApplicationContext(), CuentaUsuarioActivity.class));
                                                     finish();
@@ -103,8 +102,11 @@ public class LoginActivity extends AppCompatActivity {
 
     public boolean datosValidos (String correo, String pwd){
         progressBar.setVisibility(View.VISIBLE);
-
         boolean valido = true;
+
+        // Se quitan los mensajes previos
+        inputCorreo.setError(null);
+        inputPwd.setError(null);
 
         if (!correo.matches("[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z.]+")){
             inputCorreo.setError("El correo ingresado no es válido");
