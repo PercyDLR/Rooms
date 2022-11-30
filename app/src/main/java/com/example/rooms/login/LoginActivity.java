@@ -1,5 +1,6 @@
 package com.example.rooms.login;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -16,9 +17,13 @@ import com.example.rooms.admin.ListaEspaciosActivity;
 import com.example.rooms.dto.UsuarioDTO;
 import com.example.rooms.usuario.CuentaUsuarioActivity;
 import com.example.rooms.usuario.DetallesEspacioUsuario;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -32,22 +37,14 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        progressBar = findViewById(R.id.pbLogin);
         inputCorreo = findViewById(R.id.etLoginCorreo);
         inputPwd = findViewById(R.id.etLoginPswd);
 
         auth = FirebaseAuth.getInstance();
+        ref = FirebaseDatabase.getInstance().getReference("usuarios");
 
-
-    }
-
-
-    public boolean datosValidos (String correo, String pwd){
-        if (!correo.matches("[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+")){ inputCorreo.setError("El correo ingresado no es válido"); return false;}
-        if (!pwd.matches("^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[*.!¡¿?@$%^&~_+-=]).{8,}$")) {
-            inputPwd.setError("La contraseña debe tener al menos 8 dígitos, un número y un caracter especial");
-            return false;
-        }
-        return true;
+        progressBar.setVisibility(View.GONE);
     }
 
     public void logueo (View view){
@@ -56,37 +53,73 @@ public class LoginActivity extends AppCompatActivity {
         String pwd = inputPwd.getEditText().getText().toString().trim();
 
         if (datosValidos(correo,pwd)){
+            // Se logueo con Firebase Auth
             auth.signInWithEmailAndPassword(correo,pwd)
                     .addOnCompleteListener(logueo -> {
                         if (logueo.isSuccessful() ){
                             if (auth.getCurrentUser().isEmailVerified()){
 
-                                // TODO: obtener el rol de la DB y redirigir
-                                String rol = "usuario";
+                                // Se busca la cuenta en Realtime DB
+                                ref.child(auth.getCurrentUser().getUid()).get()
+                                        .addOnCompleteListener(task -> {
 
-                                if (rol.equals("admin")){
-                                    startActivity(new Intent(getApplicationContext(), CuentaAdminActivity.class));
-                                    finish();
-                                } else if (rol.equals("usuario")) {
-                                    startActivity(new Intent(getApplicationContext(), CuentaUsuarioActivity.class));
-                                    finish();
-                                }
+                                            progressBar.setVisibility(View.GONE);
+                                            // Si se encuentra algo en la búsqueda
+                                            if (task.isSuccessful() && task.getResult().exists()){
 
+                                                UsuarioDTO user = task.getResult().getValue(UsuarioDTO.class);
 
+                                                // Se redirige por rol
+                                                if (user.getRol().equals("admin")){
+                                                    Toast.makeText(getApplicationContext(),"Logueo Exitoso: admin",Toast.LENGTH_SHORT).show();
+                                                    Log.d("logueo", "Logueo Exitoso: admin");
+                                                    startActivity(new Intent(getApplicationContext(), CuentaAdminActivity.class));
+                                                    finish();
+                                                } else if (user.getRol().equals("usuario")) {
+                                                    Toast.makeText(getApplicationContext(),"Logueo Exitoso: usuario",Toast.LENGTH_SHORT).show();
+                                                    Log.d("logueo", "Logueo Exitoso: usuario");
+                                                    startActivity(new Intent(getApplicationContext(), CuentaUsuarioActivity.class));
+                                                    finish();
+                                                } else {
+                                                    Toast.makeText(getApplicationContext(),"No se pudo obtener el rol",Toast.LENGTH_SHORT).show();
+                                                    Log.e("logueo", "No se pudo obtener el rol");
+                                                }
+
+                                            } else {
+                                                Toast.makeText(getApplicationContext(),task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+                                                Log.e("logueo", task.getException().getMessage());
+                                            }
+                                        });
                             } else {
+                                progressBar.setVisibility(View.GONE);
                                 Toast.makeText(getApplicationContext(),"Debe verificar su correo para poder loguearse",Toast.LENGTH_SHORT).show();
                                 Log.d("logueo", "Debe verificar su correo para poder loguearse");
                                 inputPwd.getEditText().setText("");
+                                auth.getCurrentUser().sendEmailVerification();
                             }
                         } else {
+                            progressBar.setVisibility(View.GONE);
                             Toast.makeText(getApplicationContext(),logueo.getException().getMessage(),Toast.LENGTH_SHORT).show();
                             Log.e("logueo", logueo.getException().getMessage());
                             inputPwd.getEditText().setText("");
+                            inputPwd.setError("Correo o Contraseña inválidos");
+                            inputCorreo.setError("Correo o Contraseña inválidos");
                         }
                     });
+        } else {progressBar.setVisibility(View.GONE);}
+    }
+
+    public boolean datosValidos (String correo, String pwd){
+        progressBar.setVisibility(View.VISIBLE);
+
+        if (!correo.matches("[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z.]+")){
+            inputCorreo.setError("El correo ingresado no es válido");
+            return false;
         }
-
-
-        startActivity(new Intent(LoginActivity.this, DetallesEspacioUsuario.class));
+        if (!pwd.matches("^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[*.!¡¿?@$%^&~_+-=]).{8,}$")) {
+            inputPwd.setError("La contraseña debe tener al menos 8 dígitos, un número y un caracter especial");
+            return false;
+        }
+        return true;
     }
 }

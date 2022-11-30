@@ -155,7 +155,7 @@
         android:id="@+id/pbCuentaAdmin"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/negroContenedor"
+        android:progressBackgroundTint="@color/negroContenedor"
         android:padding="175dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

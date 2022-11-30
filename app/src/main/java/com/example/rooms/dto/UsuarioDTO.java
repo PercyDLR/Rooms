@@ -5,12 +5,12 @@ import com.google.firebase.database.Exclude;
 public class UsuarioDTO {
 
     @Exclude
-    String uid;
-    String nombre;
-    String apellido;
-    String correo;
-    String TI;
-    String rol;
+    private String uid;
+    private String nombre;
+    private String apellido;
+    private String correo;
+    private String TI;
+    private String rol;
 
     public UsuarioDTO() {}
 
