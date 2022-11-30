@@ -4,16 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".login.LoginActivity">
+    tools:context=".usuario.CambiarPwdUsuarioActivity">
 
     <LinearLayout
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="1dp"
         android:orientation="vertical"
+        android:padding="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,37 +22,61 @@
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:layout_marginBottom="40dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="80dp"
             android:gravity="center"
-            android:text="Ingrese los a su cuenta para poder usar la aplicación" />
+            android:text="Ingrese los siguientes datos para cambiar su contraseña" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/etLoginCorreo"
+            android:id="@+id/etPwdAntiguoCuentaUsuario"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            app:boxBackgroundColor="@color/negroContenedor"
-            android:hint="Correo"
             app:boxStrokeErrorColor="@color/amarillo"
             app:errorIconTint="@color/amarillo"
             app:errorTextColor="@color/amarillo"
+            app:boxBackgroundColor="@color/negroContenedor"
+            android:hint="Contraseña Antigua"
             app:errorEnabled="true"
+            app:passwordToggleEnabled="true"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:inputType="textPassword" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/etLoginPswd"
+            android:id="@+id/etPwdNuevoCuentaUsuario"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:boxBackgroundColor="@color/negroContenedor"
-            android:hint="Contraseña"
+            android:layout_marginBottom="10dp"
             app:boxStrokeErrorColor="@color/amarillo"
             app:errorIconTint="@color/amarillo"
             app:errorTextColor="@color/amarillo"
+            app:boxBackgroundColor="@color/negroContenedor"
+            android:hint="Contraseña Nueva"
+            app:errorEnabled="true"
+            app:passwordToggleEnabled="true"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/etRePwdNuevoCuentaUsuario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="60dp"
+            app:boxStrokeErrorColor="@color/amarillo"
+            app:errorIconTint="@color/amarillo"
+            app:errorTextColor="@color/amarillo"
+            app:boxBackgroundColor="@color/negroContenedor"
+            android:hint="Confirmar Contraseña Nueva"
             app:errorEnabled="true"
             app:passwordToggleEnabled="true"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
@@ -67,38 +88,14 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/btnIniciarSesion"
+            android:id="@+id/btnRegistro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="40dp"
-            android:onClick="logueo"
+            android:layout_marginBottom="30dp"
+            android:onClick="cambiarContrasena"
             android:padding="10dp"
-            android:text="Iniciar Sesión"
+            android:text="Cambiar Contraseña"
             android:textSize="20sp" />
-
-
-        <TextView
-            android:id="@+id/textView19"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:textColor="@color/amarillo"
-            android:text="¿Olvidó su contraseña?"
-            android:onClick="recoverPwd"/>
     </LinearLayout>
 
-    <ProgressBar
-        android:id="@+id/pbLogin"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/negroContenedor"
-        android:padding="175dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:visibility="gone"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

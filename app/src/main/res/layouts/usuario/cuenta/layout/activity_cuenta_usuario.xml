@@ -234,12 +234,12 @@
                                 android:textStyle="bold" />
 
                             <TextView
-                                android:id="@+id/textView14"
+                                android:id="@+id/tvCreditosCuentaUsuario"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:gravity="center_vertical"
-                                android:text="100"
+                                android:text="25"
                                 android:textAlignment="textEnd"
                                 android:textColor="@color/amarillo"
                                 android:textSize="24sp"
@@ -247,7 +247,7 @@
                         </LinearLayout>
 
                         <TextView
-                            android:id="@+id/textView15"
+                            android:id="@+id/tvMsgRecargaCuentaUsuario"
                             android:layout_width="match_parent"
                             android:background="@color/negroFondo"
                             android:layout_height="match_parent"
@@ -286,7 +286,7 @@
         android:visibility="gone"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/navigationView"
+        android:id="@+id/nvCuentaUsuario"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:elevation="6dp"

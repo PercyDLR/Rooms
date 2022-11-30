@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".login.LoginActivity">
+    tools:context=".login.RecoverPwdActivity">
 
     <LinearLayout
         android:layout_width="0dp"
@@ -25,15 +25,15 @@
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:layout_marginBottom="40dp"
+            android:layout_marginBottom="50dp"
             android:gravity="center"
-            android:text="Ingrese los a su cuenta para poder usar la aplicación" />
+            android:text="Ingrese el correo que corresponde a la cuenta que quiere recuperar" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/etLoginCorreo"
+            android:id="@+id/etRecoverPwdCorreo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="50dp"
             app:boxBackgroundColor="@color/negroContenedor"
             android:hint="Correo"
             app:boxStrokeErrorColor="@color/amarillo"
@@ -47,58 +47,18 @@
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/etLoginPswd"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:boxBackgroundColor="@color/negroContenedor"
-            android:hint="Contraseña"
-            app:boxStrokeErrorColor="@color/amarillo"
-            app:errorIconTint="@color/amarillo"
-            app:errorTextColor="@color/amarillo"
-            app:errorEnabled="true"
-            app:passwordToggleEnabled="true"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPassword"/>
-        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/btnIniciarSesion"
+            android:id="@+id/btnRecoverPwd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="40dp"
-            android:onClick="logueo"
+            android:onClick="mandarCorreoRecuperacion"
             android:padding="10dp"
-            android:text="Iniciar Sesión"
+            android:text="Recuperar Contraseña"
             android:textSize="20sp" />
 
-
-        <TextView
-            android:id="@+id/textView19"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:textColor="@color/amarillo"
-            android:text="¿Olvidó su contraseña?"
-            android:onClick="recoverPwd"/>
     </LinearLayout>
 
-    <ProgressBar
-        android:id="@+id/pbLogin"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/negroContenedor"
-        android:padding="175dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:visibility="gone"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

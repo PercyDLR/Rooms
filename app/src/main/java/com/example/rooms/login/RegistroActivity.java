@@ -16,7 +16,14 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.concurrent.atomic.AtomicBoolean;
+import java.sql.Timestamp;
+import java.time.DayOfWeek;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.time.temporal.TemporalAdjusters;
 
 public class RegistroActivity extends AppCompatActivity {
 
@@ -73,8 +80,11 @@ public class RegistroActivity extends AppCompatActivity {
                                     .addOnCompleteListener( registro -> {
                                         if (registro.isSuccessful()){
 
+                                            // Este es el timestamp del próximo lunes a las 00:00
+                                            Long timestampProxLunes = LocalDate.now().with(TemporalAdjusters.next(DayOfWeek.MONDAY)).atStartOfDay(ZoneId.systemDefault()).toInstant().getEpochSecond();
+
                                             // Si el registro es exitoso te registras en la DB
-                                            UsuarioDTO user = new UsuarioDTO(nombre,apellidos,ti,correo,"usuario");
+                                            UsuarioDTO user = new UsuarioDTO(nombre,apellidos,ti,correo,"usuario",100, timestampProxLunes);
 
                                             ref.child(auth.getCurrentUser().getUid()).setValue(user)
                                                     .addOnCompleteListener(guardado -> {
@@ -92,7 +102,8 @@ public class RegistroActivity extends AppCompatActivity {
                                                         }
                                                     });
 
-                                        } else {
+                                        } // Esto aparece si el correo ya estaba registrado
+                                        else {
                                             progressBar.setVisibility(View.GONE);
                                             Toast.makeText(RegistroActivity.this, "El correo ya se encuentra en uso", Toast.LENGTH_SHORT).show();
                                             inputCorreo.setError("El correo ya se encuentra en uso");

@@ -1,27 +1,20 @@
 package com.example.rooms.login;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.rooms.R;
 import com.example.rooms.admin.CuentaAdminActivity;
-import com.example.rooms.admin.ListaEspaciosActivity;
 import com.example.rooms.dto.UsuarioDTO;
 import com.example.rooms.usuario.CuentaUsuarioActivity;
-import com.example.rooms.usuario.DetallesEspacioUsuario;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -99,7 +92,6 @@ public class LoginActivity extends AppCompatActivity {
                             }
                         } else {
                             progressBar.setVisibility(View.GONE);
-                            Toast.makeText(getApplicationContext(),logueo.getException().getMessage(),Toast.LENGTH_SHORT).show();
                             Log.e("logueo", logueo.getException().getMessage());
                             inputPwd.getEditText().setText("");
                             inputPwd.setError("Correo o Contraseña inválidos");
@@ -112,14 +104,20 @@ public class LoginActivity extends AppCompatActivity {
     public boolean datosValidos (String correo, String pwd){
         progressBar.setVisibility(View.VISIBLE);
 
+        boolean valido = true;
+
         if (!correo.matches("[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z.]+")){
             inputCorreo.setError("El correo ingresado no es válido");
-            return false;
+            valido = false;
         }
         if (!pwd.matches("^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[*.!¡¿?@$%^&~_+-=]).{8,}$")) {
             inputPwd.setError("La contraseña debe tener al menos 8 dígitos, un número y un caracter especial");
-            return false;
+            valido = false;
         }
-        return true;
+        return valido;
+    }
+
+    public void recoverPwd(View view){
+        startActivity(new Intent(getApplicationContext(),RecoverPwdActivity.class));
     }
 }
