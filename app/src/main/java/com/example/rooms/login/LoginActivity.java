@@ -63,20 +63,24 @@ public class LoginActivity extends AppCompatActivity {
 
                                                 UsuarioDTO user = task.getResult().getValue(UsuarioDTO.class);
 
-                                                // Se redirige por rol
-                                                if (user.getRol().equals("admin")){
-                                                    Log.d("logueo", "Logueo Exitoso: admin");
-                                                    startActivity(new Intent(getApplicationContext(), CuentaAdminActivity.class));
-                                                    finish();
-                                                } else if (user.getRol().equals("usuario")) {
-                                                    Log.d("logueo", "Logueo Exitoso: usuario");
-                                                    startActivity(new Intent(getApplicationContext(), CuentaUsuarioActivity.class));
-                                                    finish();
+                                                // Si el usuario no fue baneado, se redirige por rol
+                                                if(user.isActivo()){
+                                                    if (user.getRol().equals("admin")){
+                                                        Log.d("logueo", "Logueo Exitoso: admin");
+                                                        startActivity(new Intent(getApplicationContext(), CuentaAdminActivity.class));
+                                                        finish();
+                                                    } else if (user.getRol().equals("usuario")) {
+                                                        Log.d("logueo", "Logueo Exitoso: usuario");
+                                                        startActivity(new Intent(getApplicationContext(), CuentaUsuarioActivity.class));
+                                                        finish();
+                                                    } else {
+                                                        Toast.makeText(getApplicationContext(),"No se pudo obtener el rol",Toast.LENGTH_SHORT).show();
+                                                        Log.e("logueo", "No se pudo obtener el rol");
+                                                    }
                                                 } else {
-                                                    Toast.makeText(getApplicationContext(),"No se pudo obtener el rol",Toast.LENGTH_SHORT).show();
-                                                    Log.e("logueo", "No se pudo obtener el rol");
+                                                    Toast.makeText(getApplicationContext(),"Su cuenta se encuentra bloqueada",Toast.LENGTH_SHORT).show();
+                                                    Log.e("logueo", "El usuario se encuentra baneado");
                                                 }
-
                                             } else {
                                                 Toast.makeText(getApplicationContext(),task.getException().getMessage(),Toast.LENGTH_SHORT).show();
                                                 Log.e("logueo", task.getException().getMessage());

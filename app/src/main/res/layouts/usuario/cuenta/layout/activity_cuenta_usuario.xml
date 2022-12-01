@@ -88,9 +88,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
-                                android:gravity="center_vertical"
+                                android:gravity="center_vertical|end"
                                 android:text="Jesús Osorio Tueros"
-                                android:textAlignment="textEnd"
                                 android:textSize="16sp" />
                         </LinearLayout>
 
@@ -120,9 +119,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
-                                android:gravity="center_vertical"
+                                android:gravity="center_vertical|end"
                                 android:text="usuario1@correo.com"
-                                android:textAlignment="textEnd"
                                 android:textSize="16sp" />
                         </LinearLayout>
 
@@ -152,9 +150,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
-                                android:gravity="center_vertical"
+                                android:gravity="center_vertical|end"
                                 android:text="20220513"
-                                android:textAlignment="textEnd"
                                 android:textSize="16sp" />
                         </LinearLayout>
                     </LinearLayout>
@@ -238,9 +235,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
-                                android:gravity="center_vertical"
+                                android:gravity="center_vertical|end"
                                 android:text="25"
-                                android:textAlignment="textEnd"
                                 android:textColor="@color/amarillo"
                                 android:textSize="24sp"
                                 android:textStyle="bold" />

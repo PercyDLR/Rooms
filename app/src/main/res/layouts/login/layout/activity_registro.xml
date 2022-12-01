@@ -83,6 +83,8 @@
                 app:errorTextColor="@color/amarillo"
                 app:boxBackgroundColor="@color/negroContenedor"
                 android:hint="TI"
+                app:counterEnabled="true"
+                app:counterMaxLength="8"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 app:errorEnabled="true">
 

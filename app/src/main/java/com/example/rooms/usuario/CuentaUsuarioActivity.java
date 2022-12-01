@@ -10,9 +10,11 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.rooms.R;
+import com.example.rooms.admin.CuentaAdminActivity;
 import com.example.rooms.dto.UsuarioDTO;
 import com.example.rooms.login.MainActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -58,7 +60,7 @@ public class CuentaUsuarioActivity extends AppCompatActivity {
            if (task.isSuccessful() && task.getResult().exists()){
                UsuarioDTO user = task.getResult().getValue(UsuarioDTO.class);
 
-               tvNombreCompleto.setText(user.getNombre() + " " + user.getApellido());
+               tvNombreCompleto.setText(user.getNombre());
                tvCorreo.setText(user.getCorreo());
                tvTI.setText(user.getTI());
 
@@ -88,23 +90,32 @@ public class CuentaUsuarioActivity extends AppCompatActivity {
     }
 
     public void logout(View view){
-        auth.signOut();
-        startActivity(new Intent(CuentaUsuarioActivity.this, MainActivity.class));
-        finish();
+        new MaterialAlertDialogBuilder(view.getContext())
+                .setTitle("Cerrar Sesión")
+                .setMessage("¿Estas seguro de querer cerrar tu sesión actual?")
+                .setNegativeButton("Cancelar",((dialogInterface, i) -> {
+                    dialogInterface.cancel();
+                })).setPositiveButton("Cerrar Sesión", ((dialogInterface, i) -> {
+                    auth.signOut();
+                    startActivity(new Intent(CuentaUsuarioActivity.this, MainActivity.class));
+                    dialogInterface.dismiss();
+                    finish();
+                })).show();
     }
 
     public void configurarNavBar(){
         bottomNavigationView = findViewById(R.id.nvCuentaUsuario);
         bottomNavigationView.setSelectedItemId(R.id.navigation_cuenta);
 
+        // TODO: hacer las otras vistas y vincular
         bottomNavigationView.setOnItemSelectedListener(item -> {
             switch(item.getItemId()){
                 case R.id.navigation_inicio:
-//                    startActivity(new Intent(getApplicationContext(),));
+//                    startActivity(new Intent(getApplicationContext(),).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
 //                    overridePendingTransition(0,0);
                     return true;
                 case R.id.navigation_reservas:
-//                    startActivity(new Intent(getApplicationContext(),));
+//                    startActivity(new Intent(getApplicationContext(),).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
 //                    overridePendingTransition(0,0);
                     return true;
                 case R.id.navigation_cuenta:

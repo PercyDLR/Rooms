@@ -84,7 +84,7 @@ public class RegistroActivity extends AppCompatActivity {
                                             Long timestampProxLunes = LocalDate.now().with(TemporalAdjusters.next(DayOfWeek.MONDAY)).atStartOfDay(ZoneId.systemDefault()).toInstant().getEpochSecond();
 
                                             // Si el registro es exitoso te registras en la DB
-                                            UsuarioDTO user = new UsuarioDTO(nombre,apellidos,ti,correo,"usuario",100, timestampProxLunes);
+                                            UsuarioDTO user = new UsuarioDTO(nombre+" "+apellidos,correo,ti,"usuario",100, timestampProxLunes,true);
 
                                             ref.child(auth.getCurrentUser().getUid()).setValue(user)
                                                     .addOnCompleteListener(guardado -> {

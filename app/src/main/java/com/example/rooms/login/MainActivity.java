@@ -17,11 +17,20 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.time.DayOfWeek;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.temporal.TemporalAdjusters;
+import java.util.HashMap;
+import java.util.Map;
+
 public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth auth;
     private DatabaseReference ref;
     ProgressBar progressBar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
                                 finish();
                             } else if (user.getRol().equals("usuario")) {
                                 Log.d("main-logueo", "Logueo Exitoso: usuario");
+                                recargarCreditos(user);
                                 startActivity(new Intent(getApplicationContext(), CuentaUsuarioActivity.class));
                                 finish();
                             } else {
@@ -66,9 +76,6 @@ public class MainActivity extends AppCompatActivity {
                                 Log.e("main-logueo", "No se pudo obtener el rol");
                             }
 
-                        } else {
-                            Toast.makeText(getApplicationContext(),task.getException().getMessage(),Toast.LENGTH_SHORT).show();
-                            Log.e("main-logueo", task.getException().getMessage());
                         }
                     });
         }
@@ -79,5 +86,21 @@ public class MainActivity extends AppCompatActivity {
     }
     public void irRegistro (View view){
         startActivity(new Intent(MainActivity.this, RegistroActivity.class));
+    }
+
+    public void recargarCreditos(UsuarioDTO user){
+        // Si ya pasó la fecha de la recarga y no se tienen los créditos completos
+        Log.d("cuenta", "Prox recarga: " + user.getTimestampSiguienteRecarga() + " , Ahora: " + Instant.now().getEpochSecond());
+        if(user.getTimestampSiguienteRecarga() < Instant.now().getEpochSecond()){
+
+            // Este es el timestamp del próximo lunes a las 00:00
+            Long timestampProxLunes = LocalDate.now().with(TemporalAdjusters.next(DayOfWeek.MONDAY)).atStartOfDay(ZoneId.systemDefault()).toInstant().getEpochSecond();
+
+            // Se actualizan los creditos y el timestamp en la db
+            Map<String,Object> updates = new HashMap<>();
+            updates.put("timestampSiguienteRecarga",timestampProxLunes);
+            updates.put("creditos",100);
+            ref.updateChildren(updates);
+        }
     }
 }

@@ -15,6 +15,27 @@
         android:theme="@style/Theme.Rooms"
         tools:targetApi="31">
         <activity
+            android:name=".usuario.ListaReservasActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".admin.ListaEspaciosActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".admin.ListaUsuariosActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".usuario.CambiarPwdUsuarioActivity"
             android:exported="false">
             <meta-data
