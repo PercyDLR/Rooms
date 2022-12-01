@@ -2,4 +2,9 @@
     <string name="app_name">Rooms</string>
     <string name="paragraphPlaceholder">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vitae ante nec erat ullamcorper dapibus eu sed est. Nullam eu pretium eros. Nunc id nunc eu enim dignissim faucibus a quis libero. Fusce sagittis, est sed dignissim cursus, augue libero gravida massa, vitae feugiat quam dui vitae sem. In quis ipsum eget felis porttitor viverra eu eget orci. Fusce ac urna lacinia, dapibus erat nec, laoreet elit. Nam quis ipsum eu elit blandit eleifend. Nam ligula felis, sollicitudin et tortor ac, vestibulum laoreet sapien. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</string>
     <string name="msgBienvenida">Rooms es una simple y estilizada aplicación de reserva de espacios libres dentro del campus de la PUCP. Accede a decenas de espacios libres  con solo 1 dedo. Para poder continuar, por favor ingrese una cuenta</string>
+    <string-array name="optFiltroUsuario">
+        <item>Nombre</item>
+        <item>Correo</item>
+        <item>TI</item>
+    </string-array>
 </resources>

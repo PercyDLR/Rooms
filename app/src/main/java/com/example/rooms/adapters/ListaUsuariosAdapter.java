@@ -6,11 +6,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.rooms.R;
+import com.example.rooms.admin.ListaUsuariosActivity;
 import com.example.rooms.dto.UsuarioDTO;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.database.DatabaseReference;
@@ -65,14 +67,16 @@ public class ListaUsuariosAdapter extends RecyclerView.Adapter<ListaUsuariosAdap
         boton.setOnClickListener(view -> {
             DatabaseReference ref = FirebaseDatabase.getInstance().getReference("usuarios");
 
-            new MaterialAlertDialogBuilder(view.getContext())
+            Toast.makeText(view.getContext(),"Seleccionaste el usuario "+user.getNombre(),Toast.LENGTH_SHORT).show();
+
+            new MaterialAlertDialogBuilder(context)
                     .setTitle(user.isActivo() ? "Banear Usuario" : "Desbanear Usuario")
                     .setMessage(user.isActivo() ? "¿Estas seguro de querer banear a este usuario?" : "¿Estas seguro de querer desbanear a este usuario?")
                     .setNegativeButton("Cancelar",((dialogInterface, i) -> {
                         dialogInterface.cancel();
                     })).setPositiveButton(user.isActivo() ? "Banear" : "Desbanear", ((dialogInterface, i) -> {
                         Map<String,Object> updates = new HashMap<>();
-                        updates.put("estado",!user.isActivo());
+                        updates.put("activo",!user.isActivo());
                         ref.child(user.getUid()).updateChildren(updates);
                         dialogInterface.dismiss();
                     })).show();

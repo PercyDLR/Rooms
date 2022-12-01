@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Toast;
@@ -33,7 +35,7 @@ public class ListaUsuariosActivity extends AppCompatActivity {
     private DatabaseReference ref;
 
     BottomNavigationView bottomNavigationView;
-    TextInputLayout buscadorUsuarios;
+    TextInputLayout buscadorUsuarios, filtroUsuarios;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,19 +46,90 @@ public class ListaUsuariosActivity extends AppCompatActivity {
         ref = FirebaseDatabase.getInstance().getReference("usuarios");
         configurarNavBar();
         buscadorUsuarios = findViewById(R.id.etBusquedaUsuariosAdmin);
+        filtroUsuarios = findViewById(R.id.etFiltroUsuariosAdmin);
 
-        listarUsuarios("");
+        // Setea los valores iniciales de la lista en la pantalla
+        listarUsuarios("", filtroUsuarios.getEditText().getText().toString());
 
+        // Realiza la bpusquedasi se presiona el botón del teclado
         buscadorUsuarios.getEditText().setOnEditorActionListener(((textView, actionId, keyEvent) -> {
-
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                listarUsuarios(buscadorUsuarios.getEditText().getText().toString().trim());
+                listarUsuarios(buscadorUsuarios.getEditText().getText().toString().trim(),filtroUsuarios.getEditText().getText().toString());
                 return true;
             }
             return false;
         }));
+
+        // Realiza la búsqueda si se selecciona un filtro distinto
+        filtroUsuarios.getEditText().addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                listarUsuarios(buscadorUsuarios.getEditText().getText().toString().trim(),filtroUsuarios.getEditText().getText().toString());
+            }
+        });
     }
 
+    // Lógica para las listas
+    public void listarUsuarios (String busqueda, String filtro){
+
+        ListaUsuariosAdapter adapter = new ListaUsuariosAdapter();
+        ArrayList<UsuarioDTO> listaUsuarios = new ArrayList<>();
+
+        adapter.setListaUsuarios(listaUsuarios);
+        adapter.setContext(this);
+
+        ref.orderByChild(filtro.toLowerCase()).startAt(busqueda).endAt(busqueda+"\uf8ff").limitToFirst(20)
+                .addChildEventListener(new ChildEventListener() {
+                    @Override
+                    public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                        UsuarioDTO user = snapshot.getValue(UsuarioDTO.class);
+
+                        if (user.getRol().equals("usuario")){
+                            user.setUid(snapshot.getKey());
+                            listaUsuarios.add(user);
+                            Log.d("listaUsuario", "Se agregó usuario de UID: "+snapshot.getKey());
+                            adapter.notifyDataSetChanged();
+                        }
+                    }
+
+                    @Override
+                    public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                        for (int ii=0; ii<listaUsuarios.size(); ii++){
+                            if (snapshot.getKey().equals(listaUsuarios.get(ii).getUid())){
+                                UsuarioDTO user = snapshot.getValue(UsuarioDTO.class);
+                                user.setUid(snapshot.getKey());
+                                listaUsuarios.set(ii,user);
+                                Log.d("listaUsuario", "Se modificó usuario de UID: "+snapshot.getKey());
+                                adapter.notifyDataSetChanged();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onChildRemoved(@NonNull DataSnapshot snapshot) {}
+
+                    @Override
+                    public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {}
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        Log.e("listaUsuarios", error.getMessage());
+                        Toast.makeText(ListaUsuariosActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+        RecyclerView recyclerView = findViewById(R.id.rvListaUsuariosAdmin);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+
+    }
+
+    // Opciones de navegación
     public void configurarNavBar(){
         bottomNavigationView = findViewById(R.id.nvUsuariosAdmin);
         bottomNavigationView.setSelectedItemId(R.id.navigation_usuarios);
@@ -78,56 +151,5 @@ public class ListaUsuariosActivity extends AppCompatActivity {
             }
             return false;
         });
-    }
-
-    public void listarUsuarios (String busqueda){
-
-        ListaUsuariosAdapter adapter = new ListaUsuariosAdapter();
-        ArrayList<UsuarioDTO> listaUsuarios = new ArrayList<>();
-
-        adapter.setListaUsuarios(listaUsuarios);
-        adapter.setContext(getApplicationContext());
-
-        RecyclerView recyclerView = findViewById(R.id.rvListaUsuariosAdmin);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-
-
-        ref.orderByChild("nombre").startAt(busqueda).endAt(busqueda+"\uf8ff").limitToFirst(20)
-                .addChildEventListener(new ChildEventListener() {
-                    @Override
-                    public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                        UsuarioDTO user = snapshot.getValue(UsuarioDTO.class);
-                        user.setUid(previousChildName);
-
-                        if (user.getRol().equals("usuario")){
-                            listaUsuarios.add(user);
-                            adapter.notifyDataSetChanged();
-                        }
-                    }
-
-                    @Override
-                    public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                        for (int ii=0; ii<listaUsuarios.size(); ii++){
-                            if (previousChildName.equals(listaUsuarios.get(ii).getUid())){
-                                listaUsuarios.set(ii,snapshot.getValue(UsuarioDTO.class));
-                                adapter.notifyDataSetChanged();
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onChildRemoved(@NonNull DataSnapshot snapshot) {}
-
-                    @Override
-                    public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {}
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                        Log.e("listaUsuarios", error.getMessage());
-                        Toast.makeText(ListaUsuariosActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
-
     }
 }
