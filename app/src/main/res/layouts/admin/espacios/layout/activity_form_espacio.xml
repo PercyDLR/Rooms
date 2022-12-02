@@ -7,8 +7,8 @@
     tools:context=".admin.FormEspacioActivity">
 
     <ScrollView
-        android:layout_width="409dp"
-        android:layout_height="729dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_marginStart="1dp"
         android:layout_marginTop="1dp"
         android:layout_marginEnd="1dp"
@@ -26,7 +26,7 @@
             android:padding="20dp">
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textField1"
+                android:id="@+id/etNombreFormEspacio"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="30dp"
@@ -39,7 +39,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textField2"
+                android:id="@+id/etDescripcionFormEspacio"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="30dp"
@@ -48,7 +48,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
-                    android:layout_height="150dp"
+                    android:layout_height="180dp"
                     android:gravity="top"
                     android:inputType="textMultiLine"
                     android:overScrollMode="always"
@@ -58,7 +58,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textField3"
+                android:id="@+id/etCreditosFormEspacio"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="30dp"
@@ -68,21 +68,23 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="number"/>
+                    android:inputType="number"
+                    android:maxLength="2"/>
             </com.google.android.material.textfield.TextInputLayout>
 
 
             <ImageButton
-                android:id="@+id/imageButton"
+                android:id="@+id/iBtnFotoFormEspacio"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
                 android:layout_marginBottom="50dp"
                 android:background="@color/negroContenedor"
+                android:onClick="obtenerImagen"
                 android:scaleType="fitCenter"
                 android:src="@drawable/tomar_foto" />
 
             <Button
-                android:id="@+id/btnIniciarSesion"
+                android:id="@+id/btnEnviarFormEspacio"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"

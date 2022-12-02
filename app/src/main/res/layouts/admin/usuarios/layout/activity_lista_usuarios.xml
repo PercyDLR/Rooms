@@ -22,8 +22,9 @@
             android:id="@+id/etBusquedaUsuariosAdmin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:boxBackgroundColor="@color/negroContenedor"
             android:hint="Buscar"
+            app:boxBackgroundColor="@color/negroContenedor"
+            app:boxStrokeColor="@color/rojo"
             app:endIconMode="clear_text"
             app:endIconTint="@color/rojo"
             app:startIconContentDescription="Buscar"
@@ -34,7 +35,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:imeOptions="actionSearch"
-                android:inputType="text"/>
+                android:inputType="text" />
 
         </com.google.android.material.textfield.TextInputLayout>
 

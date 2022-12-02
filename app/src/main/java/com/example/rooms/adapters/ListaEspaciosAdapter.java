@@ -1,6 +1,7 @@
 package com.example.rooms.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.rooms.R;
+import com.example.rooms.admin.DetallesEspacioActivity;
 import com.example.rooms.dto.EspacioDTO;
 
 import java.util.ArrayList;
@@ -34,7 +36,7 @@ public class ListaEspaciosAdapter extends RecyclerView.Adapter<ListaEspaciosAdap
     @NonNull
     @Override
     public EspacioViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(context).inflate(R.layout.elemento_usuario_rv,parent,false);
+        View itemView = LayoutInflater.from(context).inflate(R.layout.elemento_espacio,parent,false);
         return new EspacioViewHolder(itemView);
     }
 
@@ -44,11 +46,18 @@ public class ListaEspaciosAdapter extends RecyclerView.Adapter<ListaEspaciosAdap
         holder.espacio =  espacio;
 
         // Se mapean los elementos del fragmento
-        TextView encabezado = holder.itemView.findViewById(R.id.rvEncabezado);
-        TextView cuerpo = holder.itemView.findViewById(R.id.rvCuerpo);
-        ImageButton boton = holder.itemView.findViewById(R.id.rvBoton);
+        TextView encabezado = holder.itemView.findViewById(R.id.rvEncabezadoEspacio);
+        TextView contador = holder.itemView.findViewById(R.id.rvContadorEspacio);
+        ImageButton boton = holder.itemView.findViewById(R.id.rvBotonDetallesEspacio);
 
         encabezado.setText(espacio.getNombre());
+        contador.setText(espacio.getHorariosDisponibles());
+
+        boton.setOnClickListener(view -> {
+            Intent intent = new Intent(context, DetallesEspacioActivity.class);
+            intent.putExtra("espacio",espacio);
+            context.startActivity(intent);
+        });
 
     }
 

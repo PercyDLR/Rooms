@@ -19,7 +19,6 @@ import com.example.rooms.adapters.ListaUsuariosAdapter;
 import com.example.rooms.dto.UsuarioDTO;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.textfield.TextInputLayout;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -31,7 +30,6 @@ import java.util.ArrayList;
 
 public class ListaUsuariosActivity extends AppCompatActivity {
 
-    private FirebaseAuth auth;
     private DatabaseReference ref;
 
     BottomNavigationView bottomNavigationView;
@@ -42,7 +40,6 @@ public class ListaUsuariosActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_usuarios);
 
-        auth = FirebaseAuth.getInstance();
         ref = FirebaseDatabase.getInstance().getReference("usuarios");
         configurarNavBar();
         buscadorUsuarios = findViewById(R.id.etBusquedaUsuariosAdmin);
@@ -51,7 +48,7 @@ public class ListaUsuariosActivity extends AppCompatActivity {
         // Setea los valores iniciales de la lista en la pantalla
         listarUsuarios("", filtroUsuarios.getEditText().getText().toString());
 
-        // Realiza la bpusquedasi se presiona el botón del teclado
+        // Realiza la busqueda si se presiona el botón del teclado
         buscadorUsuarios.getEditText().setOnEditorActionListener(((textView, actionId, keyEvent) -> {
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 listarUsuarios(buscadorUsuarios.getEditText().getText().toString().trim(),filtroUsuarios.getEditText().getText().toString());
@@ -83,7 +80,7 @@ public class ListaUsuariosActivity extends AppCompatActivity {
         adapter.setListaUsuarios(listaUsuarios);
         adapter.setContext(this);
 
-        ref.orderByChild(filtro.toLowerCase()).startAt(busqueda).endAt(busqueda+"\uf8ff").limitToFirst(20)
+        ref.orderByChild(filtro.toLowerCase()).startAt(busqueda).endAt(busqueda+"\uf8ff")
                 .addChildEventListener(new ChildEventListener() {
                     @Override
                     public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {

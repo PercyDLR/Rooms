@@ -81,6 +81,29 @@
                 android:value="" />
         </activity>
         <activity
+            android:name=".admin.DetallesEspacioActivity"
+            android:exported="false"
+            android:parentActivityName=".admin.ListaEspaciosActivity">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".admin.FormEspacioActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".admin.FormDisponibilidadActivity"
+            android:exported="false"
+            android:parentActivityName=".admin.DetallesEspacioActivity">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".admin.CuentaAdminActivity"
             android:exported="false">
             <meta-data

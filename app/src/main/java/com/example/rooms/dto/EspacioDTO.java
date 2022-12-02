@@ -2,7 +2,9 @@ package com.example.rooms.dto;
 
 import com.google.firebase.database.Exclude;
 
-public class EspacioDTO {
+import java.io.Serializable;
+
+public class EspacioDTO implements Serializable {
 
     @Exclude
     String key;
@@ -38,4 +40,6 @@ public class EspacioDTO {
     public void setImgUrl(String imgUrl) {this.imgUrl = imgUrl;}
     public Boolean isActivo() {return activo;}
     public void setActivo(Boolean activo) {this.activo = activo;}
+    public Integer getHorariosDisponibles() {return horariosDisponibles;}
+    public void setHorariosDisponibles(Integer horariosDisponibles) {this.horariosDisponibles = horariosDisponibles;}
 }

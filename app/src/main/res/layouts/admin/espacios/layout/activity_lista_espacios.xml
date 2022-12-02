@@ -22,11 +22,12 @@
             android:id="@+id/etBusquedaEspaciosAdmin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:boxBackgroundColor="@color/negroContenedor"
+            android:layout_marginBottom="30dp"
             android:hint="Buscar"
+            app:boxBackgroundColor="@color/negroContenedor"
+            app:boxStrokeColor="@color/rojo"
             app:endIconMode="clear_text"
             app:endIconTint="@color/rojo"
-            android:layout_marginBottom="30dp"
             app:startIconContentDescription="Buscar"
             app:startIconDrawable="@drawable/ic_search"
             app:startIconTint="@color/amarillo">
@@ -35,7 +36,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:imeOptions="actionSearch"
-                android:inputType="text"/>
+                android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.cardview.widget.CardView
@@ -85,11 +86,12 @@
         android:layout_marginEnd="40dp"
         android:layout_marginBottom="100dp"
         android:contentDescription="Nuevo Espacio"
+        android:onClick="agregarEspacio"
         android:tooltipText="Agregar Espacio"
         app:backgroundTint="@color/rojo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_add"/>
+        app:srcCompat="@drawable/ic_add" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/nvEspaciosAdmin"
