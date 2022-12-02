@@ -6,13 +6,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.rooms.R;
-import com.example.rooms.admin.ListaUsuariosActivity;
 import com.example.rooms.dto.UsuarioDTO;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.database.DatabaseReference;
@@ -34,7 +32,6 @@ public class ListaUsuariosAdapter extends RecyclerView.Adapter<ListaUsuariosAdap
 
     public class UsuarioViewHolder extends RecyclerView.ViewHolder {
         UsuarioDTO usuario;
-
         public UsuarioViewHolder(@NonNull View itemView) {
             super(itemView);
         }
@@ -43,7 +40,7 @@ public class ListaUsuariosAdapter extends RecyclerView.Adapter<ListaUsuariosAdap
     @NonNull
     @Override
     public UsuarioViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(context).inflate(R.layout.elemento_rv,parent,false);
+        View itemView = LayoutInflater.from(context).inflate(R.layout.elemento_usuario_rv,parent,false);
         return new UsuarioViewHolder(itemView);
     }
 
@@ -66,8 +63,6 @@ public class ListaUsuariosAdapter extends RecyclerView.Adapter<ListaUsuariosAdap
 
         boton.setOnClickListener(view -> {
             DatabaseReference ref = FirebaseDatabase.getInstance().getReference("usuarios");
-
-            Toast.makeText(view.getContext(),"Seleccionaste el usuario "+user.getNombre(),Toast.LENGTH_SHORT).show();
 
             new MaterialAlertDialogBuilder(context)
                     .setTitle(user.isActivo() ? "Banear Usuario" : "Desbanear Usuario")

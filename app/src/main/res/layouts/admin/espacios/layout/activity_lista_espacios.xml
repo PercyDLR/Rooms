@@ -22,9 +22,11 @@
             android:id="@+id/etBusquedaEspaciosAdmin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="30dp"
             app:boxBackgroundColor="@color/negroContenedor"
             android:hint="Buscar"
+            app:endIconMode="clear_text"
+            app:endIconTint="@color/rojo"
+            android:layout_marginBottom="30dp"
             app:startIconContentDescription="Buscar"
             app:startIconDrawable="@drawable/ic_search"
             app:startIconTint="@color/amarillo">
@@ -34,7 +36,6 @@
                 android:layout_height="wrap_content"
                 android:imeOptions="actionSearch"
                 android:inputType="text"/>
-
         </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.cardview.widget.CardView
@@ -57,13 +58,16 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:background="@color/negroContenedor"
-                    android:text="Espacios Registrados"
+                    android:text="Espacios Disponibles"
                     android:textColor="@color/white"
                     android:textSize="18sp" />
 
                 <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvListaEspaciosAdmin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:scrollbars="vertical"
+
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
@@ -71,6 +75,21 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
     </LinearLayout>
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabAgregarEspacioAdmin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="100dp"
+        android:contentDescription="Nuevo Espacio"
+        android:tooltipText="Agregar Espacio"
+        app:backgroundTint="@color/rojo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_add"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/nvEspaciosAdmin"

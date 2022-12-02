@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.example.rooms.R;
 import com.example.rooms.admin.CuentaAdminActivity;
+import com.example.rooms.admin.ListaEspaciosActivity;
 import com.example.rooms.dto.UsuarioDTO;
 import com.example.rooms.usuario.CuentaUsuarioActivity;
 import com.google.firebase.auth.FirebaseAuth;
@@ -64,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
                             // Se redirige por rol
                             if (user.getRol().equals("admin")){
                                 Log.d("main-logueo", "Logueo Exitoso: admin");
-                                startActivity(new Intent(getApplicationContext(), CuentaAdminActivity.class));
+                                startActivity(new Intent(getApplicationContext(), ListaEspaciosActivity.class));
                                 finish();
                             } else if (user.getRol().equals("usuario")) {
                                 Log.d("main-logueo", "Logueo Exitoso: usuario");
