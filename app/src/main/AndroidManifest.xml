@@ -75,13 +75,6 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".usuario.DetallesEspacioUsuario"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
             android:name=".admin.DetallesEspacioActivity"
             android:exported="false"
             android:parentActivityName=".admin.ListaEspaciosActivity">

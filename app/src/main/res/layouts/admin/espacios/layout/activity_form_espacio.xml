@@ -31,6 +31,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="30dp"
                 android:hint="Nombre"
+                app:boxBackgroundColor="@color/negroContenedor"
+                app:boxStrokeErrorColor="@color/amarillo"
+                app:errorIconTint="@color/amarillo"
+                app:errorTextColor="@color/amarillo"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -44,6 +48,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="30dp"
                 android:hint="Descripción"
+                app:boxBackgroundColor="@color/negroContenedor"
+                app:boxStrokeErrorColor="@color/amarillo"
+                app:errorIconTint="@color/amarillo"
+                app:errorTextColor="@color/amarillo"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -62,6 +70,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="30dp"
+                app:boxBackgroundColor="@color/negroContenedor"
+                app:boxStrokeErrorColor="@color/amarillo"
+                app:errorIconTint="@color/amarillo"
+                app:errorTextColor="@color/amarillo"
                 android:hint="Créditos Requeridos por Hora"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
@@ -73,22 +85,22 @@
             </com.google.android.material.textfield.TextInputLayout>
 
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/iBtnFotoFormEspacio"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
                 android:layout_marginBottom="50dp"
                 android:background="@color/negroContenedor"
+                android:src="@drawable/tomar_foto"
                 android:onClick="obtenerImagen"
-                android:scaleType="fitCenter"
-                android:src="@drawable/tomar_foto" />
+                android:scaleType="fitCenter"/>
 
             <Button
                 android:id="@+id/btnEnviarFormEspacio"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
-                android:onClick="irUsuario"
+                android:onClick="enviarForm"
                 android:padding="10dp"
                 android:text="Agregar Espacio"
                 android:textSize="20sp" />

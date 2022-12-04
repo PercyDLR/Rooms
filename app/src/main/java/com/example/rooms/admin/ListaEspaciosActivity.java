@@ -65,6 +65,7 @@ public class ListaEspaciosActivity extends AppCompatActivity {
 
         adapter.setListaEspacios(listaEspacios);
         adapter.setContext(this);
+        adapter.setFuncion("admin");
 
         ref.orderByChild("nombre").startAt(busqueda).endAt(busqueda+"\uf8ff")
                 .addChildEventListener(new ChildEventListener() {

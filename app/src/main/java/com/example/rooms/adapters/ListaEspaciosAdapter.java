@@ -21,11 +21,14 @@ public class ListaEspaciosAdapter extends RecyclerView.Adapter<ListaEspaciosAdap
 
     private ArrayList<EspacioDTO> listaEspacios;
     private Context context;
+    private String funcion;
 
     public ArrayList<EspacioDTO> getListaEspacios() {return listaEspacios;}
     public void setListaEspacios(ArrayList<EspacioDTO> listaEspacios) {this.listaEspacios = listaEspacios;}
     public Context getContext() {return context;}
     public void setContext(Context context) {this.context = context;}
+    public String getFuncion() {return funcion;}
+    public void setFuncion(String funcion) {this.funcion = funcion;}
 
     public class EspacioViewHolder extends RecyclerView.ViewHolder {
         EspacioDTO espacio;
@@ -51,11 +54,12 @@ public class ListaEspaciosAdapter extends RecyclerView.Adapter<ListaEspaciosAdap
         ImageButton boton = holder.itemView.findViewById(R.id.rvBotonDetallesEspacio);
 
         encabezado.setText(espacio.getNombre());
-        contador.setText(espacio.getHorariosDisponibles());
+        contador.setText(espacio.getHorariosDisponibles().toString());
 
         boton.setOnClickListener(view -> {
             Intent intent = new Intent(context, DetallesEspacioActivity.class);
             intent.putExtra("espacio",espacio);
+            intent.putExtra("funcion",funcion);
             context.startActivity(intent);
         });
 
