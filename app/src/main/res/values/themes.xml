@@ -14,5 +14,8 @@
         <!-- Customize your theme here. -->
         <item name="android:windowBackground">@color/negroFondo</item>
         <item name="android:textColor">@color/blancoTexto</item>
+        <item name="android:navigationBarColor">@color/negroFondo</item>
+        <item name="android:fontFamily"></item>
+        <item name="fontFamily"></item>
     </style>
 </resources>

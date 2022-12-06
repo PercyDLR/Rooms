@@ -26,8 +26,12 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.functions.FirebaseFunctions;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class ListaEspaciosActivity extends AppCompatActivity {
 
@@ -74,9 +78,11 @@ public class ListaEspaciosActivity extends AppCompatActivity {
                         EspacioDTO espacio = snapshot.getValue(EspacioDTO.class);
                         espacio.setKey(snapshot.getKey());
 
-                        listaEspacios.add(espacio);
-                        Log.d("listaEspacios", "Se agregó espacio de key: "+snapshot.getKey());
-                        adapter.notifyDataSetChanged();
+                        if(espacio.isActivo()){
+                            listaEspacios.add(espacio);
+                            Log.d("listaEspacios", "Se agregó espacio de key: "+snapshot.getKey());
+                            adapter.notifyDataSetChanged();
+                        }
 
                     }
 
@@ -87,9 +93,11 @@ public class ListaEspaciosActivity extends AppCompatActivity {
                                 EspacioDTO espacio = snapshot.getValue(EspacioDTO.class);
                                 espacio.setKey(snapshot.getKey());
 
-                                listaEspacios.set(ii,espacio);
-                                Log.d("listaEspacios", "Se modificó el espacio de key: "+snapshot.getKey());
-                                adapter.notifyDataSetChanged();
+                                if(espacio.isActivo()){
+                                    listaEspacios.set(ii,espacio);
+                                    Log.d("listaEspacios", "Se modificó el espacio de key: "+snapshot.getKey());
+                                    adapter.notifyDataSetChanged();
+                                }
                             }
                         }
                     }

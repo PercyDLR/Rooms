@@ -264,7 +264,7 @@ public class FormEspacioActivity extends AppCompatActivity {
     }
 
     public void mandarAPI(EspacioDTO nuevoEspacio){
-        //TODO mandar a la API
+
         Log.d("formEspacio", "key a almacenar: " + nuevoEspacio.getKey());
 
         FirebaseFunctions.getInstance().getHttpsCallable("guardarEspacio").call(nuevoEspacio.toMap())

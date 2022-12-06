@@ -37,8 +37,8 @@
                     android:layout_height="wrap_content"
                     android:text="Encabezado"
                     android:textColor="@color/blancoTexto"
-                    android:textSize="24dp"
-                    android:maxEms="8"
+                    android:textSize="20dp"
+                    android:maxEms="7"
                     android:maxLines="1"
                     android:ellipsize="end"/>
                 <LinearLayout
@@ -54,14 +54,14 @@
                         android:text="Horarios Disponibles: "
                         android:paddingEnd="5dp"
                         android:textColor="@color/rojo"
-                        android:textSize="16sp" />
+                        android:textSize="12sp" />
                     <TextView
                         android:id="@+id/rvContadorEspacio"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Contador"
                         android:textColor="@color/blancoTexto"
-                        android:textSize="16sp"
+                        android:textSize="12sp"
                         android:textStyle="bold"/>
 
                 </LinearLayout>

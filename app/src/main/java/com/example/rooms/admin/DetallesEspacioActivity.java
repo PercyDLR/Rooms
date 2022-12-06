@@ -36,7 +36,7 @@ public class DetallesEspacioActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private DatabaseReference ref;
 
-    private TextView tvNombre, tvDescripcion, tvCreditosRequeridos, tvCreditosRestantes;
+    private TextView tvDescripcion, tvCreditosRequeridos, tvCreditosRestantes;
     private LinearLayout llCreditosRestantes;
     private ImageButton btnAgregarDisponibilidad;
     private ImageView ivFoto;
@@ -55,7 +55,8 @@ public class DetallesEspacioActivity extends AppCompatActivity {
         funcion = getIntent().getStringExtra("funcion");
         funcion = funcion==null ? "" : funcion;
 
-        tvNombre = findViewById(R.id.tvNombreEspacioDetalles);
+        setTitle(espacio.getNombre());
+
         tvDescripcion = findViewById(R.id.tvDescripcionEspacioDetalles);
         tvCreditosRequeridos = findViewById(R.id.tvCreditosRequeridosEspacioDetalles);
         tvCreditosRestantes = findViewById(R.id.tvCreditosRestantesEspacioDetalles);
@@ -65,7 +66,6 @@ public class DetallesEspacioActivity extends AppCompatActivity {
         llCreditosRestantes = findViewById(R.id.llCreditosRestantesEspacioDetalles);
 
         Picasso.get().load(espacio.getImgUrl()).into(ivFoto);
-        tvNombre.setText(espacio.getNombre());
         tvDescripcion.setText(espacio.getDescripcion());
         tvCreditosRequeridos.setText(espacio.getCreditosPorHora()+ " / HORA");
 
@@ -79,7 +79,7 @@ public class DetallesEspacioActivity extends AppCompatActivity {
                 break;
             // Caso de ver detalles desde admin
             case "admin":
-
+                btnAgregarDisponibilidad.setVisibility(View.VISIBLE);
                 break;
             default:
                 llCreditosRestantes.setVisibility(View.VISIBLE);
@@ -136,12 +136,12 @@ public class DetallesEspacioActivity extends AppCompatActivity {
                             dialogInterface.cancel();
                         })).setPositiveButton("Eliminar", ((dialogInterface, i) -> {
 
-                            DatabaseReference ref = FirebaseDatabase.getInstance().getReference("usuarios").child(espacio.getKey());
+                            DatabaseReference ref = FirebaseDatabase.getInstance().getReference("espacios").child(espacio.getKey());
                             Map<String,Object> updates = new HashMap<>();
                             updates.put("activo",false);
                             ref.updateChildren(updates);
                             dialogInterface.dismiss();
-                            startActivity(new Intent(getApplicationContext(),CuentaAdminActivity.class));
+                            startActivity(new Intent(getApplicationContext(),ListaEspaciosActivity.class));
                             finish();
 
                         })).show();
