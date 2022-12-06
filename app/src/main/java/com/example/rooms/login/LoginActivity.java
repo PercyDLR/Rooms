@@ -11,8 +11,10 @@ import android.widget.Toast;
 
 import com.example.rooms.R;
 import com.example.rooms.admin.CuentaAdminActivity;
+import com.example.rooms.admin.ListaEspaciosActivity;
 import com.example.rooms.dto.UsuarioDTO;
 import com.example.rooms.usuario.CuentaUsuarioActivity;
+import com.example.rooms.usuario.ListaEspaciosUsuarioActivity;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -67,11 +69,11 @@ public class LoginActivity extends AppCompatActivity {
                                                 if(user.isActivo()){
                                                     if (user.getRol().equals("admin")){
                                                         Log.d("logueo", "Logueo Exitoso: admin");
-                                                        startActivity(new Intent(getApplicationContext(), CuentaAdminActivity.class));
+                                                        startActivity(new Intent(getApplicationContext(), ListaEspaciosActivity.class));
                                                         finish();
                                                     } else if (user.getRol().equals("usuario")) {
                                                         Log.d("logueo", "Logueo Exitoso: usuario");
-                                                        startActivity(new Intent(getApplicationContext(), CuentaUsuarioActivity.class));
+                                                        startActivity(new Intent(getApplicationContext(), ListaEspaciosUsuarioActivity.class));
                                                         finish();
                                                     } else {
                                                         Toast.makeText(getApplicationContext(),"No se pudo obtener el rol",Toast.LENGTH_SHORT).show();

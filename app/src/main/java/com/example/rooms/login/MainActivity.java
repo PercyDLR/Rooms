@@ -14,6 +14,7 @@ import com.example.rooms.admin.CuentaAdminActivity;
 import com.example.rooms.admin.ListaEspaciosActivity;
 import com.example.rooms.dto.UsuarioDTO;
 import com.example.rooms.usuario.CuentaUsuarioActivity;
+import com.example.rooms.usuario.ListaEspaciosUsuarioActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -70,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
                             } else if (user.getRol().equals("usuario")) {
                                 Log.d("main-logueo", "Logueo Exitoso: usuario");
                                 recargarCreditos(user);
-                                startActivity(new Intent(getApplicationContext(), CuentaUsuarioActivity.class));
+                                startActivity(new Intent(getApplicationContext(), ListaEspaciosUsuarioActivity.class));
                                 finish();
                             } else {
                                 Toast.makeText(getApplicationContext(),"No se pudo obtener el rol",Toast.LENGTH_SHORT).show();

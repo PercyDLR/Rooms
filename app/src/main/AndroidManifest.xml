@@ -16,6 +16,13 @@
         android:theme="@style/Theme.Rooms"
         tools:targetApi="31">
         <activity
+            android:name=".usuario.ListaEspaciosUsuarioActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".usuario.ListaReservasActivity"
             android:exported="false"
             android:screenOrientation="portrait">
@@ -50,8 +57,8 @@
         <activity
             android:name=".login.RecoverPwdActivity"
             android:exported="false"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".login.LoginActivity">
+            android:parentActivityName=".login.LoginActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -59,8 +66,8 @@
         <activity
             android:name=".login.RegistroActivity"
             android:exported="false"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".login.MainActivity">
+            android:parentActivityName=".login.MainActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -68,8 +75,8 @@
         <activity
             android:name=".login.LoginActivity"
             android:exported="false"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".login.MainActivity">
+            android:parentActivityName=".login.MainActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -85,8 +92,8 @@
         <activity
             android:name=".admin.DetallesEspacioActivity"
             android:exported="false"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".admin.ListaEspaciosActivity">
+            android:parentActivityName=".admin.ListaEspaciosActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -102,8 +109,8 @@
         <activity
             android:name=".admin.FormDisponibilidadActivity"
             android:exported="false"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".admin.DetallesEspacioActivity">
+            android:parentActivityName=".admin.DetallesEspacioActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

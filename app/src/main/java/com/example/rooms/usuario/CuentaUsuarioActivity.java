@@ -111,8 +111,8 @@ public class CuentaUsuarioActivity extends AppCompatActivity {
         bottomNavigationView.setOnItemSelectedListener(item -> {
             switch(item.getItemId()){
                 case R.id.navigation_inicio:
-//                    startActivity(new Intent(getApplicationContext(),).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
-//                    overridePendingTransition(0,0);
+                    startActivity(new Intent(getApplicationContext(),ListaEspaciosUsuarioActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                    overridePendingTransition(0,0);
                     return true;
                 case R.id.navigation_reservas:
 //                    startActivity(new Intent(getApplicationContext(),).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
