@@ -15,7 +15,7 @@
         <item name="android:windowBackground">@color/negroFondo</item>
         <item name="android:textColor">@color/blancoTexto</item>
         <item name="android:navigationBarColor">@color/negroFondo</item>
-        <item name="android:fontFamily"></item>
-        <item name="fontFamily"></item>
+        <item name="android:fontFamily">@font/poppins</item>
+        <item name="fontFamily">@font/poppins</item>
     </style>
 </resources>

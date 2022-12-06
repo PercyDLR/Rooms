@@ -23,11 +23,11 @@
             android:id="@+id/textView18"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:textStyle="bold"
             android:layout_marginBottom="50dp"
             android:gravity="center"
-            android:text="Ingrese el correo que corresponde a la cuenta que quiere recuperar" />
+            android:text="Ingrese el correo que corresponde a la cuenta que quiere recuperar"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/etRecoverPwdCorreo"
