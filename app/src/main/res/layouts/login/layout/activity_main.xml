@@ -17,14 +17,14 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:padding="20dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:gravity="center"
-            android:padding="20dp">
+            android:gravity="center">
             <TextView
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
@@ -39,17 +39,17 @@
                 android:id="@+id/imageView2"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
-                android:layout_marginTop="21dp"
+                android:layout_marginTop="15dp"
                 tools:srcCompat="@tools:sample/avatars" />
 
             <TextView
                 android:id="@+id/textView16"
-                android:layout_width="363dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="15dp"
                 android:text="@string/msgBienvenida"
                 android:textAlignment="center"
-                android:textSize="16sp" />
+                android:textSize="14sp" />
 
             <Button
                 android:id="@+id/btnLoginMain"
@@ -60,15 +60,14 @@
                 android:onClick="irLogueo"
                 android:padding="10dp"
                 android:text="Iniciar Sesión"
-                android:textSize="20sp" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/textView17"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 android:text="¿No tienes una cuenta?"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <Button
@@ -77,10 +76,10 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
                 android:layout_marginTop="16dp"
+                android:onClick="irRegistro"
                 android:padding="10dp"
                 android:text="Regístrate"
-                android:onClick="irRegistro"
-                android:textSize="20sp" />
+                android:textSize="18sp"/>
         </LinearLayout>
     </ScrollView>
 

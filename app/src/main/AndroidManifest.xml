@@ -17,7 +17,9 @@
         tools:targetApi="31">
         <activity
             android:name=".usuario.ListaEspaciosUsuarioActivity"
-            android:exported="false">
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Rooms.NoActionBar">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -25,7 +27,8 @@
         <activity
             android:name=".usuario.ListaReservasActivity"
             android:exported="false"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Rooms.NoActionBar">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -33,7 +36,8 @@
         <activity
             android:name=".admin.ListaEspaciosActivity"
             android:exported="false"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Rooms.NoActionBar">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -41,7 +45,8 @@
         <activity
             android:name=".admin.ListaUsuariosActivity"
             android:exported="false"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Rooms.NoActionBar">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -49,6 +54,7 @@
         <activity
             android:name=".usuario.CambiarPwdUsuarioActivity"
             android:exported="false"
+            android:parentActivityName=".usuario.CuentaUsuarioActivity"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.app.lib_name"
@@ -84,7 +90,8 @@
         <activity
             android:name=".usuario.CuentaUsuarioActivity"
             android:exported="false"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Rooms.NoActionBar">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -118,7 +125,8 @@
         <activity
             android:name=".admin.CuentaAdminActivity"
             android:exported="false"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Rooms.NoActionBar">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -126,7 +134,8 @@
         <activity
             android:name=".login.MainActivity"
             android:exported="true"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Rooms.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
