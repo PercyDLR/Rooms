@@ -14,7 +14,7 @@
         <!-- Customize your theme here. -->
         <item name="android:windowBackground">@color/negroFondo</item>
         <item name="android:textColor">@color/blancoTexto</item>
-        <item name="android:navigationBarColor">@color/negroFondo</item>
+        <item name="android:navigationBarColor">@color/negroMenu</item>
         <item name="android:fontFamily">@font/poppins</item>
         <item name="fontFamily">@font/poppins</item>
     </style>
@@ -22,5 +22,9 @@
     <style name="Theme.Rooms.NoActionBar" parent="Theme.Rooms">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="App.Custom.Indicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">@color/amarilloTranslucido</item>
     </style>
 </resources>

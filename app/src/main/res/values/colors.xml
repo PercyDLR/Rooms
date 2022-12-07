@@ -11,9 +11,11 @@
     <!-- Colores Personalizados -->
     <color name="negroFondo">#252121</color>
     <color name="negroContenedor">#2E2828</color>
+    <color name="negroMenu">#131111</color>
     <color name="rojo">#d84642</color>
     <color name="rojoSecundario">#ff786d</color>
     <color name="amarillo">#f9a900</color>
+    <color name="amarilloTranslucido">#33F9A900</color>
     <color name="amarilloSecundario">#ffda4a</color>
     <color name="blancoTexto">#DADADA</color>
 
