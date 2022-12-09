@@ -2,6 +2,8 @@ package com.example.rooms.admin;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.rooms.R;
+import com.example.rooms.adapters.ItemDispAdapter;
 import com.example.rooms.dto.EspacioDTO;
 import com.example.rooms.dto.UsuarioDTO;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -70,6 +73,7 @@ public class DetallesEspacioActivity extends AppCompatActivity {
         tvCreditosRequeridos.setText(espacio.getCreditosPorHora()+ " / HORA");
 
         manejarVistas();
+        setearRecyclerView();
     }
 
     public void manejarVistas(){
@@ -152,8 +156,16 @@ public class DetallesEspacioActivity extends AppCompatActivity {
     }
 
     public void agregarDisponibilidad (View view){
-        Intent intent = new Intent(DetallesEspacioActivity.this,FormEspacioActivity.class);
+        Intent intent = new Intent(DetallesEspacioActivity.this,FormDisponibilidadActivity.class);
         intent.putExtra("espacio",espacio);
         startActivity(intent);
+    }
+
+    public void setearRecyclerView () {
+        RecyclerView rvItem = findViewById(R.id.rvDisponibilidad);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(DetallesEspacioActivity.this);
+        ItemDispAdapter itemAdapter = new ItemDispAdapter();
+        rvItem.setAdapter(itemAdapter);
+        rvItem.setLayoutManager(layoutManager);
     }
 }

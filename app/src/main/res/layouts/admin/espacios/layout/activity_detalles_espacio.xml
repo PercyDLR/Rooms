@@ -246,11 +246,12 @@
                             android:layout_weight="1"/>
 
                         <Button
-                            android:id="@+id/btn"
+                            android:id="@+id/btnReservar"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:text="Reservar"
-                            android:textStyle="bold"/>
+                            android:textStyle="bold"
+                            android:visibility="gone"/>
 
                         <ImageButton
                             android:id="@+id/btnAgregarDisponibilidad"
@@ -263,20 +264,13 @@
                             android:visibility="gone"/>
                     </LinearLayout>
 
-                    <androidx.cardview.widget.CardView
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvDisponibilidad"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:cardBackgroundColor="@color/negroFondo"
-                        app:cardCornerRadius="20dp">
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginVertical="10dp"
-                            android:layout_marginHorizontal="20dp"
-                            android:visibility="gone"/>
-
-                    </androidx.cardview.widget.CardView>
+                        android:layout_marginVertical="10dp"
+                        tools:listitem="@layout/card_item"
+                        tools:itemCount="2"/>
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>

@@ -6,4 +6,86 @@
     android:layout_height="match_parent"
     tools:context=".admin.FormDisponibilidadActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="1dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textView18"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="40dp"
+            android:gravity="center"
+            android:text="Seleccione la fecha y periodo donde el espacio estará disponible" />
+
+        <Button
+            android:id="@+id/inputFecha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Widget.Material3.Button.OutlinedButton.Icon"
+            android:text="Seleccione una fecha"
+            app:icon="@drawable/ic_calendar"
+            android:layout_marginBottom="10dp"
+            app:iconTint="@color/amarillo"
+            android:textColor="@color/amarillo"
+            android:textStyle="bold"
+            android:onClick="seleccionarFecha"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="20dp">
+
+            <Button
+                android:id="@+id/inputHoraInicio"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="Inicio"
+                app:icon="@drawable/ic_clock"
+                app:iconTint="@color/negroFondo"
+                android:backgroundTint="@color/amarillo"
+                android:textColor="@color/negroFondo"
+                android:textStyle="bold"
+                android:onClick="seleccionarHoraInicio"/>
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+            <Button
+                android:id="@+id/inputHoraFin"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="Fin"
+                app:icon="@drawable/ic_clock"
+                app:iconTint="@color/negroFondo"
+                android:backgroundTint="@color/amarillo"
+                android:textColor="@color/negroFondo"
+                android:textStyle="bold"
+                android:onClick="seleccionarHoraFin"/>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnAgregarDisponibilidad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="40dp"
+            android:onClick="agregarDisponibilidad"
+            android:padding="10dp"
+            android:text="Agregar Disponibilidad"
+            android:textSize="16sp" />
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
