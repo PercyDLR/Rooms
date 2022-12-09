@@ -208,6 +208,10 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:orientation="vertical">
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -228,7 +232,7 @@
                         android:layout_height="match_parent"
                         android:background="@color/negroContenedor"
                         android:orientation="horizontal"
-                        android:layout_marginBottom="15dp">
+                        android:layout_marginBottom="5dp">
 
                         <TextView
                             android:id="@+id/textView5"
@@ -246,11 +250,12 @@
                             android:layout_weight="1"/>
 
                         <Button
-                            android:id="@+id/btnReservar"
+                            android:id="@+id/btnReservarDetallesEspacio"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:text="Reservar"
                             android:textStyle="bold"
+                            android:onClick="reservar"
                             android:visibility="gone"/>
 
                         <ImageButton
@@ -268,13 +273,12 @@
                         android:id="@+id/rvDisponibilidad"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginVertical="10dp"
                         tools:listitem="@layout/card_item"
                         tools:itemCount="2"/>
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
-
+        </LinearLayout>
 
         </LinearLayout>
     </ScrollView>

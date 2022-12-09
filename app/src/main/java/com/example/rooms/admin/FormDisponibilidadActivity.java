@@ -140,12 +140,14 @@ public class FormDisponibilidadActivity extends AppCompatActivity {
                 .addOnCompleteListener(task -> {
                     if(task.isSuccessful()){
                         Toast.makeText(FormDisponibilidadActivity.this, "Disponibilidad Agregada con éxito", Toast.LENGTH_SHORT).show();
-                        Log.d("formDisponibilidad", "La fecha de inicio debe ser mayor a la fecha de fin");
+                        Log.d("formDisponibilidad", "Disponibilidad Agregada con éxito");
 
                         Intent intent = new Intent(FormDisponibilidadActivity.this,DetallesEspacioActivity.class);
                         intent.putExtra("espacio",espacio);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         intent.putExtra("funcion","admin");
+                        startActivity(intent);
+                        finish();
 
                     } else {
                         Toast.makeText(FormDisponibilidadActivity.this, "Disponibilidad Agregada con éxito", Toast.LENGTH_SHORT).show();
