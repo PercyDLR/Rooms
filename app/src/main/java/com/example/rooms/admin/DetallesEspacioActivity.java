@@ -17,12 +17,15 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.rooms.R;
 import com.example.rooms.adapters.ItemDispAdapter;
 import com.example.rooms.dto.EspacioDTO;
 import com.example.rooms.dto.HorarioDTO;
+import com.example.rooms.dto.ReservaDTO;
 import com.example.rooms.dto.UsuarioDTO;
+import com.example.rooms.usuario.ListaReservasActivity;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
@@ -38,6 +41,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -45,6 +49,7 @@ public class DetallesEspacioActivity extends AppCompatActivity {
 
     private FirebaseAuth auth;
     private DatabaseReference ref;
+    UsuarioDTO user;
 
     private TextView tvDescripcion, tvCreditosRequeridos, tvCreditosRestantes;
     private LinearLayout llCreditosRestantes;
@@ -104,7 +109,7 @@ public class DetallesEspacioActivity extends AppCompatActivity {
                 // Se llena la información del usuario
                 ref.child("usuarios/"+auth.getCurrentUser().getUid()).get().addOnCompleteListener(task -> {
                     if (task.isSuccessful() && task.getResult().exists()){
-                        UsuarioDTO user = task.getResult().getValue(UsuarioDTO.class);
+                        user = task.getResult().getValue(UsuarioDTO.class);
 
                         // Si ya pasó la fecha de la recarga y no se tienen los créditos completos
                         Log.d("detallesEspacio", "Prox recarga: " + user.getTimestampSiguienteRecarga() + " , Ahora: " + Instant.now().getEpochSecond());
@@ -124,7 +129,6 @@ public class DetallesEspacioActivity extends AppCompatActivity {
                     }
                 });
         }
-        // TODO: Disponibilidad y Hora
     }
 
 
@@ -199,6 +203,14 @@ public class DetallesEspacioActivity extends AppCompatActivity {
                 HashMap<String,Boolean> lista = new HashMap<>();
                 try {
                     lista = (HashMap<String,Boolean>) snapshot.getValue();
+
+                    ArrayList<String> listaHoras = new ArrayList<>(lista.keySet());
+                    for (int i = 0;i<listaHoras.size();i++){
+                        if (!lista.get(listaHoras.get(i))){
+                            lista.remove(listaHoras.get(i));
+                        }
+                    }
+
                 } catch (Exception e){
                     ArrayList<Boolean> listaHoras = (ArrayList<Boolean>) snapshot.getValue();
 
@@ -238,5 +250,81 @@ public class DetallesEspacioActivity extends AppCompatActivity {
 
     public void reservar(View view){
         Log.d("detallesEspacio", "Los horarios seleccionados son: "+listaHorariosSeleccionados.toString());
+
+        // Aqui se almacenaría el costo de la reserva
+        Integer costoTotal = 0;
+
+        // Aqui se registrará lo que se debe actualizar en el horario del espacio
+        HashMap<String, Object> update = new HashMap<>();
+
+        // Aqui se guardarán las reservas
+        ArrayList<ReservaDTO> listaReservas = new ArrayList<>();
+
+        // Se llenan los ReservaDTO
+        for(Long dia : listaHorariosSeleccionados.keySet()){
+
+            Integer horaAnterior = listaHorariosSeleccionados.get(dia).get(0);
+
+            for (Integer hora : listaHorariosSeleccionados.get(dia)){
+
+                // Primera hora de la lista, o si existe un salto
+                if (hora.equals(horaAnterior) || hora-horaAnterior > 1){
+                    ReservaDTO reserva = new ReservaDTO();
+
+                    reserva.setKeyEspacio(espacio.getKey());
+                    reserva.setNombreEspacio(espacio.getNombre());
+                    reserva.setDia(dia.toString());
+                    reserva.setHoraInicio(hora);
+                    reserva.setHoraFin(hora+1);
+
+                    listaReservas.add(reserva);
+                }
+                // La horas son consecutivas
+                else {
+                    ReservaDTO reserva = listaReservas.get(listaReservas.size()-1);
+                    reserva.setHoraFin(hora+1);
+                }
+
+                costoTotal += espacio.getCreditosPorHora();
+                update.put("disponibilidad/"+espacio.getKey()+"/"+dia+"/"+hora, false);
+                horaAnterior = hora;
+            }
+        }
+
+        Log.d("detallesEspacio", "La lista de reservas es: "+listaReservas);
+        Log.d("detallesEspacio", "La lista de updates es: "+update);
+
+        // Se comprueba que el usuario pueda pagar la reserva
+        if (costoTotal > user.getCreditos()){
+            Toast.makeText(DetallesEspacioActivity.this, "No se tienen suficientes créditos para la(s) reserva(s)", Toast.LENGTH_SHORT).show();
+            Log.e("detallesEspacio", "No se tienen suficientes créditos para la(s) reserva(s)");
+            return;
+        }
+
+        // Ahora se guardan todas las reservas
+        for (ReservaDTO reserva : listaReservas){
+            ref.child("reservas/"+auth.getCurrentUser().getUid()).push().setValue(reserva)
+                    .addOnFailureListener(e -> {
+                        Toast.makeText(DetallesEspacioActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        Log.e("detallesEspacio", e.getMessage());
+                    });
+        }
+
+        // Se le restan al usuario los créditos de la reserva
+        update.put("usuario/"+auth.getCurrentUser().getUid()+"/creditos",user.getCreditos()-costoTotal);
+
+        // Se cambia el estado de los hoarrios reservados a No Disponible
+        ref.updateChildren(update).addOnCompleteListener(task -> {
+            if (task.isSuccessful()){
+
+                Toast.makeText(DetallesEspacioActivity.this, "Se hizo la reserva correctamente", Toast.LENGTH_SHORT).show();
+                Log.d("detallesEspacio", "Se hizo la reserva correctamente");
+                startActivity(new Intent(DetallesEspacioActivity.this,ListaReservasActivity.class));
+
+            } else {
+                Toast.makeText(DetallesEspacioActivity.this, "Hubo un problema", Toast.LENGTH_SHORT).show();
+                Log.e("detallesEspacio", task.getException().getMessage());
+            }
+        });
     }
 }

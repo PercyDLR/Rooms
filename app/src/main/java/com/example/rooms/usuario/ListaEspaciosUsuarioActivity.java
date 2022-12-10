@@ -31,8 +31,8 @@ public class ListaEspaciosUsuarioActivity extends AppCompatActivity {
 
     private DatabaseReference ref;
 
-    BottomNavigationView bottomNavigationView;
-    TextInputLayout buscadorEspacios;
+    private BottomNavigationView bottomNavigationView;
+    private TextInputLayout buscadorEspacios;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,9 +121,9 @@ public class ListaEspaciosUsuarioActivity extends AppCompatActivity {
                 case R.id.navigation_inicio:
                     return true;
                 case R.id.navigation_reservas:
-//                    startActivity(new Intent(getApplicationContext(), ListaUsuariosActivity.class)
-//                            .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
-//                    overridePendingTransition(0,0);
+                   startActivity(new Intent(getApplicationContext(), ListaReservasActivity.class)
+                           .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                    overridePendingTransition(0,0);
                     return true;
                 case R.id.navigation_cuenta:
                     startActivity(new Intent(getApplicationContext(), CuentaUsuarioActivity.class)

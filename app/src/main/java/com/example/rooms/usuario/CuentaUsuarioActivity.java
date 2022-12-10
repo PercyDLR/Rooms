@@ -32,9 +32,9 @@ public class CuentaUsuarioActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private DatabaseReference ref;
 
-    BottomNavigationView bottomNavigationView;
-    TextView tvNombreCompleto, tvCorreo, tvTI, tvCreditos;
-    ProgressBar progressBar;
+    private BottomNavigationView bottomNavigationView;
+    private TextView tvNombreCompleto, tvCorreo, tvTI, tvCreditos;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,16 +107,17 @@ public class CuentaUsuarioActivity extends AppCompatActivity {
         bottomNavigationView = findViewById(R.id.nvCuentaUsuario);
         bottomNavigationView.setSelectedItemId(R.id.navigation_cuenta);
 
-        // TODO: hacer las otras vistas y vincular
         bottomNavigationView.setOnItemSelectedListener(item -> {
             switch(item.getItemId()){
                 case R.id.navigation_inicio:
-                    startActivity(new Intent(getApplicationContext(),ListaEspaciosUsuarioActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                    startActivity(new Intent(getApplicationContext(),ListaEspaciosUsuarioActivity.class)
+                            .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                     overridePendingTransition(0,0);
                     return true;
                 case R.id.navigation_reservas:
-//                    startActivity(new Intent(getApplicationContext(),).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
-//                    overridePendingTransition(0,0);
+                    startActivity(new Intent(getApplicationContext(),ListaReservasActivity.class)
+                            .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                    overridePendingTransition(0,0);
                     return true;
                 case R.id.navigation_cuenta:
                     return true;

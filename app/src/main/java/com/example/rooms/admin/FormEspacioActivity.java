@@ -12,6 +12,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.InputType;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -82,6 +83,7 @@ public class FormEspacioActivity extends AppCompatActivity {
         // Si se manda un espacio para editarlo, se llenan los campos
         if (espacio != null){
             setTitle("Editar Espacio");
+            inputNombre.getEditText().setInputType(InputType.TYPE_NULL);
             inputNombre.getEditText().setText(espacio.getNombre());
             inputDescripcion.getEditText().setText(espacio.getDescripcion());
             inputCreditos.getEditText().setText(espacio.getCreditosPorHora().toString());
@@ -280,12 +282,9 @@ public class FormEspacioActivity extends AppCompatActivity {
                 intent.putExtra("funcion","admin");
                 startActivity(intent);
             }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
+        }).addOnFailureListener(e -> {
                 Log.e("formEspacio",e.getMessage());
                 Toast.makeText(FormEspacioActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-            }
         });
     }
 }

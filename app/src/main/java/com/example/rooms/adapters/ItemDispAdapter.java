@@ -19,14 +19,17 @@ import com.example.rooms.dto.HorarioDTO;
 import com.example.rooms.login.MainActivity;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 public class ItemDispAdapter extends RecyclerView.Adapter<ItemDispAdapter.ItemViewHolder> {
 
@@ -82,19 +85,8 @@ public class ItemDispAdapter extends RecyclerView.Adapter<ItemDispAdapter.ItemVi
                         .setMessage("¿Estás seguro de querer eliminar el horario del "+dia.format(df)+"?")
                         .setNegativeButton("Cancelar",((dialogInterface, i) -> {
                             dialogInterface.cancel();
-                        })).setPositiveButton("Cerrar Sesión", ((dialogInterface, i) -> {
-                            FirebaseDatabase.getInstance().getReference("disponibilidad")
-                                    .child(keyEspacio).child(horarioDia.getFecha().toString()).removeValue()
-                                    .addOnCompleteListener(task -> {
-                                        if (task.isSuccessful()){
-
-                                            Log.d("detallesEspacio", "Se eliminó el horario del "+dia.format(df));
-                                            Toast.makeText(view.getContext(), "Se eliminó el horario del "+dia.format(df), Toast.LENGTH_SHORT).show();
-                                        } else {
-                                            Log.e("detallesEspacio", task.getException().getMessage());
-                                            Toast.makeText(view.getContext(), "Hubo un problema", Toast.LENGTH_SHORT).show();
-                                        }
-                                    });
+                        })).setPositiveButton("Eliminar", ((dialogInterface, i) -> {
+                            eliminarHorario(view,horarioDia,dia,df);
                         })).show();
             });
         }
@@ -115,6 +107,26 @@ public class ItemDispAdapter extends RecyclerView.Adapter<ItemDispAdapter.ItemVi
     @Override
     public int getItemCount() {
         return listaHorarios.size();
+    }
+
+    private void eliminarHorario(View view, HorarioDTO horarioDia, LocalDateTime dia, DateTimeFormatter df) {
+        FirebaseDatabase.getInstance().getReference("disponibilidad")
+                .child(keyEspacio).child(horarioDia.getFecha().toString()).removeValue()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()){
+
+                        // Resta en 1 el número de horarios disponibles
+                        Map<String, Object> update = new HashMap<>();
+                        update.put("espacios/"+keyEspacio+"/horariosDisponibles", ServerValue.increment(-1));
+                        FirebaseDatabase.getInstance().getReference().updateChildren(update);
+
+                        Log.d("detallesEspacio", "Se eliminó el horario del "+dia.format(df));
+                        Toast.makeText(view.getContext(), "Se eliminó el horario del "+dia.format(df), Toast.LENGTH_SHORT).show();
+                    } else {
+                        Log.e("detallesEspacio", task.getException().getMessage());
+                        Toast.makeText(view.getContext(), "Hubo un problema", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     // Getters y setters

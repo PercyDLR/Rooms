@@ -16,6 +16,7 @@ import com.example.rooms.dto.HorarioDTO;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 
 public class SubItemDispAdapter extends RecyclerView.Adapter<SubItemDispAdapter.SubItemViewHolder> {
@@ -51,11 +52,11 @@ public class SubItemDispAdapter extends RecyclerView.Adapter<SubItemDispAdapter.
                     if (btn.getCurrentTextColor() == view.getContext().getColor(R.color.rojo)) {
 
                         listaHorariosSeleccionados.get(diaReserva).add(Integer.parseInt(listaKeys.get(position)));
+                        listaHorariosSeleccionados.get(diaReserva).sort(Comparator.naturalOrder());
                         btn.setBackgroundColor(view.getContext().getColor(R.color.rojo));
                         btn.setTextColor(view.getContext().getColor(R.color.negroFondo));
 
                         Log.d("detallesEspacio", "Agregada la hora " + listaKeys.get(position) + ":00");
-                        Toast.makeText(view.getContext(), "Agregada la hora " + listaKeys.get(position) + ":00", Toast.LENGTH_SHORT).show();
                     } else {
                         listaHorariosSeleccionados.get(diaReserva).remove((Object) Integer.parseInt(listaKeys.get(position)));
                         btn.setBackgroundColor(view.getContext().getColor(R.color.negroFondo));
@@ -65,7 +66,6 @@ public class SubItemDispAdapter extends RecyclerView.Adapter<SubItemDispAdapter.
                             listaHorariosSeleccionados.remove(diaReserva);
                         }
 
-                        Toast.makeText(view.getContext(), "Quitada la hora " + listaKeys.get(position) + ":00", Toast.LENGTH_SHORT).show();
                         Log.d("detallesEspacio", "Quitada la hora " + listaKeys.get(position) + ":00");
                     }
 
