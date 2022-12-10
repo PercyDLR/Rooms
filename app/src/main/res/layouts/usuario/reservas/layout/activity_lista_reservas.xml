@@ -41,7 +41,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:background="@color/negroContenedor"
-                    android:text="Espacios Disponibles"
+                    android:text="Reservas Pendientes"
                     android:textColor="@color/white"
                     android:textSize="18sp" />
 

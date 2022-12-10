@@ -33,6 +33,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 import com.squareup.picasso.Picasso;
 
 import java.time.DayOfWeek;
@@ -286,7 +287,7 @@ public class DetallesEspacioActivity extends AppCompatActivity {
                 }
 
                 costoTotal += espacio.getCreditosPorHora();
-                update.put("disponibilidad/"+espacio.getKey()+"/"+dia+"/"+hora, false);
+                update.put(dia+"/"+hora, false);
                 horaAnterior = hora;
             }
         }
@@ -310,11 +311,8 @@ public class DetallesEspacioActivity extends AppCompatActivity {
                     });
         }
 
-        // Se le restan al usuario los créditos de la reserva
-        update.put("usuario/"+auth.getCurrentUser().getUid()+"/creditos",user.getCreditos()-costoTotal);
-
         // Se cambia el estado de los hoarrios reservados a No Disponible
-        ref.updateChildren(update).addOnCompleteListener(task -> {
+        ref.child("disponibilidad/"+espacio.getKey()).updateChildren(update).addOnCompleteListener(task -> {
             if (task.isSuccessful()){
 
                 Toast.makeText(DetallesEspacioActivity.this, "Se hizo la reserva correctamente", Toast.LENGTH_SHORT).show();
@@ -326,5 +324,10 @@ public class DetallesEspacioActivity extends AppCompatActivity {
                 Log.e("detallesEspacio", task.getException().getMessage());
             }
         });
+
+        // Se actualizan los créditos
+        update.clear();
+        update.put("creditos", ServerValue.increment(-costoTotal));
+        ref.child("usuarios/"+auth.getCurrentUser().getUid()).updateChildren(update);
     }
 }
