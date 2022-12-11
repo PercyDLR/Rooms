@@ -40,7 +40,7 @@
                 android:layout_width="200dp"
                 android:layout_height="200dp"
                 android:layout_marginTop="15dp"
-                tools:srcCompat="@tools:sample/avatars" />
+                android:src="@drawable/logo"/>
 
             <TextView
                 android:id="@+id/textView16"
@@ -88,7 +88,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/negroContenedor"
-            android:padding="165dp"
+            android:padding="150dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

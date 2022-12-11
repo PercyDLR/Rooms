@@ -19,6 +19,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.rooms.R;
@@ -51,6 +52,8 @@ public class FormEspacioActivity extends AppCompatActivity {
     private TextInputLayout inputNombre, inputDescripcion, inputCreditos;
     private ImageView btnFoto;
     private Button btnEnviarForm;
+    private ProgressBar pb;
+
     private EspacioDTO espacio;
     private Boolean conFoto = false;
 
@@ -68,7 +71,6 @@ public class FormEspacioActivity extends AppCompatActivity {
 
         espacio = (EspacioDTO) getIntent().getSerializableExtra("espacio");
 
-
         // Se piden los permisos para la cámara
         if (checkSelfPermission(Manifest.permission.CAMERA)!= PackageManager.PERMISSION_GRANTED){
             requestPermissions(new String[]{Manifest.permission.CAMERA},PERMISOS_CODE);
@@ -79,6 +81,7 @@ public class FormEspacioActivity extends AppCompatActivity {
         inputCreditos = findViewById(R.id.etCreditosFormEspacio);
         btnFoto = findViewById(R.id.iBtnFotoFormEspacio);
         btnEnviarForm = findViewById(R.id.btnEnviarFormEspacio);
+        pb = findViewById(R.id.pbFormEspacio);
 
         // Si se manda un espacio para editarlo, se llenan los campos
         if (espacio != null){
@@ -176,7 +179,9 @@ public class FormEspacioActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void enviarForm(View view) throws IOException {
+    public void enviarForm(View view) {
+
+        pb.setVisibility(View.VISIBLE);
 
         boolean datosValidos = true;
 
@@ -205,6 +210,7 @@ public class FormEspacioActivity extends AppCompatActivity {
 
             // Se verifica que se agregara una foto
             if (!conFoto){
+                pb.setVisibility(View.GONE);
                 Toast.makeText(FormEspacioActivity.this, "Debe ingresar una imagen", Toast.LENGTH_SHORT).show();
                 return;
             }
@@ -237,6 +243,7 @@ public class FormEspacioActivity extends AppCompatActivity {
 
                 imgRef.putBytes(baos.toByteArray()).continueWithTask(task -> {
                     if  (!task.isSuccessful()) {
+                        pb.setVisibility(View.GONE);
                         Log.e("formEspacio", task.getException().getMessage());
                         Toast.makeText(FormEspacioActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
@@ -249,6 +256,7 @@ public class FormEspacioActivity extends AppCompatActivity {
                         mandarAPI(newEspacio);
                     }
                     else {
+                        pb.setVisibility(View.GONE);
                         Toast.makeText(FormEspacioActivity.this, "Hubo un problema al subir la imagen", Toast.LENGTH_SHORT).show();
                         Log.e("formEspacio", task.getException().getMessage());
                     }
@@ -261,8 +269,7 @@ public class FormEspacioActivity extends AppCompatActivity {
                 newEspacio.setImgSize(espacio.getImgSize());
                 mandarAPI(newEspacio);
             }
-        }
-
+        } else pb.setVisibility(View.GONE);
     }
 
     public void mandarAPI(EspacioDTO nuevoEspacio){
